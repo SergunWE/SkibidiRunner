@@ -8,8 +8,8 @@ namespace SkibidiRunner
     public class TileSpawner : MonoBehaviourInitializable
     {
         [SerializeField] private int tileStartCount = 10;
-        [SerializeField] private int minimumStraightTiles = 3;
-        [SerializeField] private int maximumStraightTiles = 15;
+        [SerializeField] private int minimumStraightTiles = 5;
+        [SerializeField] private int maximumStraightTiles = 20;
         [SerializeField] private GameObject startingTile;
         [SerializeField] private List<GameObject> turnstilePrefabs;
         [SerializeField] private List<GameObject> obstaclePrefabs;
@@ -107,7 +107,7 @@ namespace SkibidiRunner
         
         private void SpawnObstacle()
         {
-            if (Random.value > 0.2f) return;
+            if (Random.value > 0.3f) return;
             GameObject obstaclePrefab = obstaclePrefabs.GetRandomItem();
             Quaternion newObjectRotation  = obstaclePrefab.gameObject.transform.rotation * Quaternion.LookRotation(_currentTileDirection, Vector3.up);
             GameObject obstacle = Instantiate(obstaclePrefab, _currentTileLocation, newObjectRotation);

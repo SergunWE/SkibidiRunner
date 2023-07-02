@@ -1,18 +1,18 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace SkibidiRunner
 {
     public class GameOverManager : MonoBehaviour
     {
-        [SerializeField] private GameObject gameOverCanvas;
-
         public void StopGame()
         {
-            gameOverCanvas.SetActive(true);
+            
         }
 
         public void RestartLevel()
         {
+            SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
         }
 
         public void SubmitScore()

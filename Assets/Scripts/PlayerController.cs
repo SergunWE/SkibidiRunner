@@ -2,7 +2,6 @@
 using System.Collections;
 using TempleRun;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 namespace SkibidiRunner
@@ -11,8 +10,6 @@ namespace SkibidiRunner
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] private float initialPlayerSpeed = 4f;
-        [SerializeField] private float maximumPlayerSpeed = 30f;
-        [SerializeField] private float playerSpeedIncreaseRate = .1f;
         [SerializeField] private float jumpHeight = 1.0f;
         [SerializeField] private float initialGravityValue = -9.81f;
         [SerializeField] private LayerMask groundLayer;
