@@ -18,6 +18,7 @@ namespace SkibidiRunner
         private Vector3 _currentTileDirection = Vector3.forward;
         private List<Tile> _currentTiles;
         private List<GameObject> _currentObstacles;
+        private Vector3 _locationOffset = new Vector3(0.01f, 0.01f, 0.01f);
 
         private Tile _prevTile;
         private Renderer _prevTileRenderer;
@@ -101,13 +102,13 @@ namespace SkibidiRunner
             if (_prevTile.type == TileType.Straight)
             {
                 _currentTileLocation +=
-                    Vector3.Scale(_prevTileRenderer.bounds.size, _currentTileDirection);
+                    Vector3.Scale(_prevTileRenderer.bounds.size - _locationOffset, _currentTileDirection);
             }
         }
         
         private void SpawnObstacle()
         {
-            if (Random.value > 0.3f) return;
+            if (Random.value > 0.4f) return;
             GameObject obstaclePrefab = obstaclePrefabs.GetRandomItem();
             Quaternion newObjectRotation  = obstaclePrefab.gameObject.transform.rotation * Quaternion.LookRotation(_currentTileDirection, Vector3.up);
             GameObject obstacle = Instantiate(obstaclePrefab, _currentTileLocation, newObjectRotation);

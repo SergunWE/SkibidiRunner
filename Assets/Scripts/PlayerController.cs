@@ -20,53 +20,53 @@ namespace SkibidiRunner
         public Action<Vector3> TurnEvent { private get; set; }
         public Action GameOverEvent { private get; set; }
 
-        private float playerSpeed;
-        private float gravity;
-        private Vector3 movementDirection = Vector3.forward;
-        private PlayerInput playerInput;
-        private InputAction turnAction;
-        private InputAction jumpAction;
-        private InputAction slideAction;
-        private CharacterController controller;
-        private Vector3 playerVelocity;
-        private bool sliding;
-        private int slidingAnimationId;
-        private int jumpAnimationId;
-        private int deathAnimationId;
+        private float _playerSpeed;
+        private float _gravity;
+        private Vector3 _movementDirection = Vector3.forward;
+        private PlayerInput _playerInput;
+        private InputAction _turnAction;
+        private InputAction _jumpAction;
+        private InputAction _slideAction;
+        private CharacterController _controller;
+        private Vector3 _playerVelocity;
+        private bool _sliding;
+        private int _slidingAnimationId;
+        private int _jumpAnimationId;
+        private int _deathAnimationId;
 
 
-        private Collider[] _hitColliders = new Collider[5];
+        private readonly Collider[] _hitColliders = new Collider[5];
 
         private void Awake()
         {
-            playerInput = GetComponent<PlayerInput>();
-            controller = GetComponent<CharacterController>();
-            slidingAnimationId = Animator.StringToHash("SprintingForwardRoll");
-            jumpAnimationId = Animator.StringToHash("Jump");
-            deathAnimationId = Animator.StringToHash("FallingBackDeath");
-            turnAction = playerInput.actions["Turn"];
-            jumpAction = playerInput.actions["Jump"];
-            slideAction = playerInput.actions["Slide"];
+            _playerInput = GetComponent<PlayerInput>();
+            _controller = GetComponent<CharacterController>();
+            _slidingAnimationId = Animator.StringToHash("RunningSlide");
+            _jumpAnimationId = Animator.StringToHash("Jump");
+            _deathAnimationId = Animator.StringToHash("FallingBackDeath");
+            _turnAction = _playerInput.actions["Turn"];
+            _jumpAction = _playerInput.actions["Jump"];
+            _slideAction = _playerInput.actions["Slide"];
         }
 
         private void Start()
         {
-            gravity = initialGravityValue;
-            playerSpeed = initialPlayerSpeed;
+            _gravity = initialGravityValue;
+            _playerSpeed = initialPlayerSpeed;
         }
 
         private void OnEnable()
         {
-            turnAction.performed += PlayerTurn;
-            slideAction.performed += PlayerSlide;
-            jumpAction.performed += PlayerJump;
+            _turnAction.performed += PlayerTurn;
+            _slideAction.performed += PlayerSlide;
+            _jumpAction.performed += PlayerJump;
         }
 
         private void OnDisable()
         {
-            turnAction.performed -= PlayerTurn;
-            slideAction.performed -= PlayerSlide;
-            jumpAction.performed -= PlayerJump;
+            _turnAction.performed -= PlayerTurn;
+            _slideAction.performed -= PlayerSlide;
+            _jumpAction.performed -= PlayerJump;
         }
 
         private void Update()
@@ -77,15 +77,15 @@ namespace SkibidiRunner
                 return;
             }
 
-            controller.Move(transform.forward * (playerSpeed * Time.deltaTime));
+            _controller.Move(transform.forward * (_playerSpeed * Time.deltaTime));
 
-            if (IsGrounded() && playerVelocity.y < 0)
+            if (IsGrounded() && _playerVelocity.y < 0)
             {
-                playerVelocity.y = 0f;
+                _playerVelocity.y = 0f;
             }
 
-            playerVelocity.y += gravity * Time.deltaTime;
-            controller.Move(playerVelocity * Time.deltaTime);
+            _playerVelocity.y += _gravity * Time.deltaTime;
+            _controller.Move(_playerVelocity * Time.deltaTime);
         }
 
         private void PlayerTurn(InputAction.CallbackContext context)
@@ -96,7 +96,7 @@ namespace SkibidiRunner
             if (turnPosition.HasValue)
             {
                 var targetDirection = Quaternion.AngleAxis(90 * context.ReadValue<float>(), Vector3.up) *
-                                      movementDirection;
+                                      _movementDirection;
                 TurnEvent?.Invoke(targetDirection);
                 Turn(contextValue, turnPosition.Value);
             }
@@ -108,7 +108,7 @@ namespace SkibidiRunner
 
         private void PlayerSlide(InputAction.CallbackContext context)
         {
-            if (!sliding && IsGrounded())
+            if (!_sliding && IsGrounded())
             {
                 StartCoroutine(Slide());
             }
@@ -117,45 +117,45 @@ namespace SkibidiRunner
         private void PlayerJump(InputAction.CallbackContext context)
         {
             if (!IsGrounded()) return;
-            playerVelocity.y += Mathf.Sqrt(jumpHeight * gravity * -3f);
-            animator.Play(jumpAnimationId);
+            _playerVelocity.y += Mathf.Sqrt(jumpHeight * _gravity * -3f);
+            animator.Play(_jumpAnimationId);
         }
 
         private IEnumerator Slide()
         {
-            sliding = true;
+            _sliding = true;
             // Shrink the collider
-            Vector3 originalControllerCenter = controller.center;
+            Vector3 originalControllerCenter = _controller.center;
             Vector3 newControllerCenter = originalControllerCenter;
-            controller.height /= 2;
-            newControllerCenter.y -= controller.height / 2;
-            controller.center = newControllerCenter;
+            _controller.height /= 2;
+            newControllerCenter.y -= _controller.height / 2;
+            _controller.center = newControllerCenter;
             // PLay the sliding animation
-            animator.Play(slidingAnimationId);
-            yield return new WaitForSeconds(0.9f);
+            animator.Play(_slidingAnimationId);
+            yield return new WaitForSeconds(0.8f);
             // Set the character controller collider back to normal after sliding.
-            controller.height *= 2;
-            controller.center = originalControllerCenter;
-            sliding = false;
+            _controller.height *= 2;
+            _controller.center = originalControllerCenter;
+            _sliding = false;
         }
 
         private void Turn(float turnValue, Vector3 turnPosition)
         {
             var transform1 = transform;
             var tempPlayerPosition = new Vector3(turnPosition.x, transform1.position.y, turnPosition.z);
-            controller.enabled = false;
+            _controller.enabled = false;
             transform1.position = tempPlayerPosition;
-            controller.enabled = true;
+            _controller.enabled = true;
             var targetRotation = transform1.rotation * Quaternion.Euler(0, 90 * turnValue, 0);
             var transform2 = transform;
             transform2.rotation = targetRotation;
-            movementDirection = transform2.forward.normalized;
+            _movementDirection = transform2.forward.normalized;
         }
 
         private void GameOver()
         {
             Debug.Log("Game Over!");
-            animator.Play(deathAnimationId);
+            animator.Play(_deathAnimationId);
             GameOverEvent?.Invoke();
             enabled = false;
             //gameObject.SetActive(false);
@@ -180,7 +180,7 @@ namespace SkibidiRunner
         {
             var transform1 = transform;
             var raycastOriginFirst = transform1.position;
-            raycastOriginFirst.y -= controller.height / 2f;
+            raycastOriginFirst.y -= _controller.height / 2f;
             raycastOriginFirst.y += .1f;
 
             var raycastOriginSecond = raycastOriginFirst;
