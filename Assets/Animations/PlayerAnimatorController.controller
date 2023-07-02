@@ -97,7 +97,7 @@ AnimatorController:
   m_AnimatorParameters:
   - m_Name: SlidingSpeed
     m_Type: 1
-    m_DefaultFloat: 1.16
+    m_DefaultFloat: 1.28
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}

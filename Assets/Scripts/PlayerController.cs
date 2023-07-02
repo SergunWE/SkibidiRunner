@@ -132,7 +132,7 @@ namespace SkibidiRunner
             controller.center = newControllerCenter;
             // PLay the sliding animation
             animator.Play(slidingAnimationId);
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.9f);
             // Set the character controller collider back to normal after sliding.
             controller.height *= 2;
             controller.center = originalControllerCenter;
@@ -176,7 +176,7 @@ namespace SkibidiRunner
             return null;
         }
 
-        private bool IsGrounded(float length = .3f)
+        private bool IsGrounded(float length = .4f)
         {
             var transform1 = transform;
             var raycastOriginFirst = transform1.position;
