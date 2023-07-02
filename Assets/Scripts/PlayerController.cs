@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using TempleRun;
 using UnityEngine;
 using UnityEngine.Events;
@@ -16,8 +17,11 @@ namespace SkibidiRunner
         [SerializeField] private float initialGravityValue = -9.81f;
         [SerializeField] private LayerMask groundLayer;
         [SerializeField] private LayerMask turnLayer;
-        
+        [SerializeField] private LayerMask obstacleLayer;
+        [SerializeField] private Animator animator;
+
         public Action<Vector3> TurnEvent { private get; set; }
+        public Action GameOverEvent { private get; set; }
 
         private float playerSpeed;
         private float gravity;
@@ -28,7 +32,9 @@ namespace SkibidiRunner
         private InputAction slideAction;
         private CharacterController controller;
         private Vector3 playerVelocity;
-        
+        private bool sliding;
+        private int slidingAnimationId;
+
 
         private Collider[] _hitColliders = new Collider[5];
 
@@ -36,6 +42,7 @@ namespace SkibidiRunner
         {
             playerInput = GetComponent<PlayerInput>();
             controller = GetComponent<CharacterController>();
+            slidingAnimationId = Animator.StringToHash("Sliding");
             turnAction = playerInput.actions["Turn"];
             jumpAction = playerInput.actions["Jump"];
             slideAction = playerInput.actions["Slide"];
@@ -63,6 +70,12 @@ namespace SkibidiRunner
 
         private void Update()
         {
+            if (!IsGrounded(20))
+            {
+                GameOver();
+                return;
+            }
+
             controller.Move(transform.forward * (playerSpeed * Time.deltaTime));
 
             if (IsGrounded() && playerVelocity.y < 0)
@@ -77,24 +90,51 @@ namespace SkibidiRunner
         private void PlayerTurn(InputAction.CallbackContext context)
         {
             float contextValue = context.ReadValue<float>();
-            
+
             var turnPosition = CheckTurn(contextValue);
-            if (!turnPosition.HasValue) return;
-            var targetDirection = Quaternion.AngleAxis(90 * context.ReadValue<float>(), Vector3.up) *
-                                  movementDirection;
-            TurnEvent?.Invoke(targetDirection);
-            Debug.Log("!!!!!!!!!!!!!!!!!");
-            Turn(contextValue, turnPosition.Value);
+            if (turnPosition.HasValue)
+            {
+                var targetDirection = Quaternion.AngleAxis(90 * context.ReadValue<float>(), Vector3.up) *
+                                      movementDirection;
+                TurnEvent?.Invoke(targetDirection);
+                Turn(contextValue, turnPosition.Value);
+            }
+            else
+            {
+                GameOver();
+            }
         }
 
         private void PlayerSlide(InputAction.CallbackContext context)
         {
+            if (!sliding && IsGrounded())
+            {
+                StartCoroutine(Slide());
+            }
         }
 
         private void PlayerJump(InputAction.CallbackContext context)
         {
             if (!IsGrounded()) return;
             playerVelocity.y += Mathf.Sqrt(jumpHeight * gravity * -3f);
+        }
+
+        private IEnumerator Slide()
+        {
+            sliding = true;
+            // Shrink the collider
+            Vector3 originalControllerCenter = controller.center;
+            Vector3 newControllerCenter = originalControllerCenter;
+            controller.height /= 2;
+            newControllerCenter.y -= controller.height / 2;
+            controller.center = newControllerCenter;
+            // PLay the sliding animation
+            animator.Play(slidingAnimationId);
+            yield return new WaitForSeconds(1);
+            // Set the character controller collider back to normal after sliding.
+            controller.height *= 2;
+            controller.center = originalControllerCenter;
+            sliding = false;
         }
 
         private void Turn(float turnValue, Vector3 turnPosition)
@@ -108,6 +148,14 @@ namespace SkibidiRunner
             var transform2 = transform;
             transform2.rotation = targetRotation;
             movementDirection = transform2.forward.normalized;
+        }
+
+        private void GameOver()
+        {
+            Debug.Log("Game Over!");
+            GameOverEvent?.Invoke();
+            enabled = false;
+            //gameObject.SetActive(false);
         }
 
         private Vector3? CheckTurn(float turnValue)
@@ -137,11 +185,19 @@ namespace SkibidiRunner
             raycastOriginFirst -= forward * .2f;
             raycastOriginSecond += forward * .2f;
 
-            Debug.DrawLine(raycastOriginFirst, raycastOriginFirst - Vector3.down * length, Color.green, 2f);
-            Debug.DrawLine(raycastOriginSecond, raycastOriginFirst - Vector3.down * length, Color.red, 2f);
+            //Debug.DrawLine(raycastOriginFirst, raycastOriginFirst - Vector3.down * length, Color.green, 2f);
+            //Debug.DrawLine(raycastOriginSecond, raycastOriginFirst - Vector3.down * length, Color.red, 2f);
 
             return Physics.Raycast(raycastOriginFirst, Vector3.down, out var hit, length, groundLayer) ||
                    Physics.Raycast(raycastOriginSecond, Vector3.down, out var hit2, length, groundLayer);
+        }
+
+        private void OnControllerColliderHit(ControllerColliderHit hit)
+        {
+            if (((1 << hit.collider.gameObject.layer) & obstacleLayer) != 0)
+            {
+                GameOver();
+            }
         }
     }
 }
