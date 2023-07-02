@@ -31,6 +31,8 @@ namespace SkibidiRunner
         private Vector3 playerVelocity;
         private bool sliding;
         private int slidingAnimationId;
+        private int jumpAnimationId;
+        private int deathAnimationId;
 
 
         private Collider[] _hitColliders = new Collider[5];
@@ -39,7 +41,9 @@ namespace SkibidiRunner
         {
             playerInput = GetComponent<PlayerInput>();
             controller = GetComponent<CharacterController>();
-            slidingAnimationId = Animator.StringToHash("Sliding");
+            slidingAnimationId = Animator.StringToHash("SprintingForwardRoll");
+            jumpAnimationId = Animator.StringToHash("Jump");
+            deathAnimationId = Animator.StringToHash("FallingBackDeath");
             turnAction = playerInput.actions["Turn"];
             jumpAction = playerInput.actions["Jump"];
             slideAction = playerInput.actions["Slide"];
@@ -114,6 +118,7 @@ namespace SkibidiRunner
         {
             if (!IsGrounded()) return;
             playerVelocity.y += Mathf.Sqrt(jumpHeight * gravity * -3f);
+            animator.Play(jumpAnimationId);
         }
 
         private IEnumerator Slide()
@@ -150,6 +155,7 @@ namespace SkibidiRunner
         private void GameOver()
         {
             Debug.Log("Game Over!");
+            animator.Play(deathAnimationId);
             GameOverEvent?.Invoke();
             enabled = false;
             //gameObject.SetActive(false);
@@ -170,7 +176,7 @@ namespace SkibidiRunner
             return null;
         }
 
-        private bool IsGrounded(float length = .2f)
+        private bool IsGrounded(float length = .3f)
         {
             var transform1 = transform;
             var raycastOriginFirst = transform1.position;
