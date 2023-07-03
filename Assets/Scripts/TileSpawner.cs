@@ -7,7 +7,7 @@ namespace SkibidiRunner
 {
     public class TileSpawner : MonoBehaviourInitializable
     {
-        [SerializeField] private int tileStartCount = 10;
+        [SerializeField] private int tileStartCount = 5;
         [SerializeField] private int minimumStraightTiles = 3;
         [SerializeField] private int maximumStraightTiles = 20;
         [SerializeField] private GameObject startingTile;
