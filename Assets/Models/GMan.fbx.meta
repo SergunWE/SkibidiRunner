@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d0a9fade9eafe274db6d46b072bb4fb8
+guid: e268afca684413b4880b357cc4ba01ec
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,32 +7,17 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Eye1Mat
+      name: Eye1Mtl
     second: {fileID: 2100000, guid: 3d465be8318d5ab4fa86e221885bd1ac, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Eye2Mat
-    second: {fileID: 2100000, guid: 3d465be8318d5ab4fa86e221885bd1ac, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Gman1Mat
+      name: Gman1Mtl
     second: {fileID: 2100000, guid: bc2b48b545bac784ea8e6506b15cc2e2, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Main1Mat
-    second: {fileID: 2100000, guid: 51188a7fef259cf46b3164532fbf9bc9, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Part1Mat
-    second: {fileID: 2100000, guid: 51188a7fef259cf46b3164532fbf9bc9, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Part2Mat
+      name: Part1Mtl
     second: {fileID: 2100000, guid: 51188a7fef259cf46b3164532fbf9bc9, type: 2}
   materials:
     materialImportMode: 2
@@ -54,7 +39,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5

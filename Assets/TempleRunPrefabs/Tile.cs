@@ -16,6 +16,7 @@ public class Tile : MonoBehaviour
 {
     public TileType type;
     public Transform pivot;
+    public float size;
 }
 
 }

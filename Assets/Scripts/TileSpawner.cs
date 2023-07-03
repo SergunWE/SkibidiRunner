@@ -8,7 +8,7 @@ namespace SkibidiRunner
     public class TileSpawner : MonoBehaviourInitializable
     {
         [SerializeField] private int tileStartCount = 10;
-        [SerializeField] private int minimumStraightTiles = 5;
+        [SerializeField] private int minimumStraightTiles = 3;
         [SerializeField] private int maximumStraightTiles = 20;
         [SerializeField] private GameObject startingTile;
         [SerializeField] private List<GameObject> turnstilePrefabs;
@@ -18,7 +18,6 @@ namespace SkibidiRunner
         private Vector3 _currentTileDirection = Vector3.forward;
         private List<Tile> _currentTiles;
         private List<GameObject> _currentObstacles;
-        private Vector3 _locationOffset = new Vector3(0.01f, 0.01f, 0.01f);
 
         private Tile _prevTile;
         private Renderer _prevTileRenderer;
@@ -44,20 +43,20 @@ namespace SkibidiRunner
             _currentTileDirection = direction;
             DeletePreviousTiles();
             DeletePreviousObstacle();
-            Vector3 tilePlacementScale;
-            if (_prevTile.type == TileType.Sideways)
-            {
-                tilePlacementScale = Vector3.Scale(_prevTileRenderer.bounds.size / 2 + (Vector3.one *
-                    _startingTileBoxCollider.size.z / 2), _currentTileDirection);
-            }
-            else
-            {
-                tilePlacementScale = Vector3.Scale((_prevTileRenderer.bounds.size - (Vector3.one * 2)
-                    ) + (Vector3.one * _startingTileBoxCollider.size.z / 2), _currentTileDirection);
-            }
+            // Vector3 tilePlacementScale;
+            // if (_prevTile.type == TileType.Sideways)
+            // {
+            //     tilePlacementScale = Vector3.Scale(_prevTileRenderer.bounds.size / 2 + (Vector3.one *
+            //         _startingTileBoxCollider.size.z / 2), _currentTileDirection);
+            // }
+            // else
+            // {
+            //     tilePlacementScale = Vector3.Scale((_prevTileRenderer.bounds.size - (Vector3.one * 2)
+            //         ) + (Vector3.one * _startingTileBoxCollider.size.z / 2), _currentTileDirection);
+            // }
             
-            _currentTileLocation += tilePlacementScale;
-
+            //_currentTileLocation += _prevTile.size;
+            _currentTileLocation = _prevTile.pivot.position + _currentTileDirection * _prevTile.size;
             int currentPathLength = Random.Range(minimumStraightTiles, maximumStraightTiles);
             for (int i = 0; i < currentPathLength; i++) 
             {
@@ -93,7 +92,7 @@ namespace SkibidiRunner
                                   Quaternion.LookRotation(_currentTileDirection, Vector3.up);
             var newTile = Instantiate(tile.gameObject, _currentTileLocation, newTileRotation);
             _prevTile = newTile.GetComponent<Tile>();
-            _prevTileRenderer = _prevTile.GetComponent<Renderer>();
+            _prevTileRenderer = _prevTile.GetComponentInChildren<Renderer>();
             _currentTiles.Add(_prevTile);
             
             if(spawnObstacle) SpawnObstacle();
@@ -101,8 +100,8 @@ namespace SkibidiRunner
             // (3, 4, 5) * (0, 0, 1) => (0,0,-5)'
             if (_prevTile.type == TileType.Straight)
             {
-                _currentTileLocation +=
-                    Vector3.Scale(_prevTileRenderer.bounds.size - _locationOffset, _currentTileDirection);
+                _currentTileLocation += _currentTileDirection * _prevTile.size;
+                //Vector3.Scale(_prevTile.size * Vector3.forward, _currentTileDirection);
             }
         }
         
