@@ -26,6 +26,7 @@ namespace SkibidiRunner.Music
             _songBpm = gameMusic.SongBpm;
             _secPerBeat = 60f / _songBpm;
             _dspSongTime = (float)AudioSettings.dspTime - gameMusic.FirstBeatOffset;
+            musicSource.clip = gameMusic.Song;
             musicSource.Play();
             _init = true;
         }
