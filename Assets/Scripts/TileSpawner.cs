@@ -10,6 +10,7 @@ namespace SkibidiRunner
         [SerializeField] private int minimumStraightTiles = 3;
         [SerializeField] private int maximumStraightTiles = 20;
         [SerializeField] [Range(0, 1)] private float frequencyObstacle = 0.5f;
+        [SerializeField] [Range(0, 1)] private float frequencyObstacleChangeRate;
         [SerializeField] private GameObject startingTile;
         [SerializeField] private List<GameObject> turnstilePrefabs;
         [SerializeField] private List<GameObject> obstaclePrefabs;
@@ -19,11 +20,13 @@ namespace SkibidiRunner
         private List<Tile> _currentTiles;
         private List<GameObject> _currentObstacles;
         private Tile _prevTile;
+        private float _frequencyObstacle;
 
         public override void Initialize()
         {
             _currentTiles = new List<Tile>();
             _currentObstacles = new List<GameObject>();
+            _frequencyObstacle = frequencyObstacle;
 
             for (int i = 0; i < tileStartCount; i++)
             {
@@ -46,6 +49,18 @@ namespace SkibidiRunner
             }
             
             SpawnTile(turnstilePrefabs.GetRandomItem().GetComponent<Tile>());
+        }
+
+        public void IncreaseObstacles()
+        {
+            if (_frequencyObstacle > 1)
+            {
+                _frequencyObstacle = 1;
+            }
+            else
+            {
+                _frequencyObstacle += frequencyObstacleChangeRate;
+            }
         }
 
         private void DeletePreviousTiles()
@@ -87,7 +102,7 @@ namespace SkibidiRunner
         
         private void SpawnObstacle()
         {
-            if (Random.value > frequencyObstacle) return;
+            if (Random.value >= _frequencyObstacle) return;
             GameObject obstaclePrefab = obstaclePrefabs.GetRandomItem();
             Quaternion newObjectRotation  = obstaclePrefab.gameObject.transform.rotation * Quaternion.LookRotation(_currentTileDirection, Vector3.up);
             GameObject obstacle = Instantiate(obstaclePrefab, _currentTileLocation, newObjectRotation);

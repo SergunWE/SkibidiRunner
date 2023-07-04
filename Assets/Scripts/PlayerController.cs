@@ -34,7 +34,6 @@ namespace SkibidiRunner
         private int _jumpAnimationId;
         private int _deathAnimationId;
 
-
         private readonly Collider[] _hitColliders = new Collider[5];
 
         private void Awake()
@@ -108,7 +107,7 @@ namespace SkibidiRunner
 
         private void PlayerSlide(InputAction.CallbackContext context)
         {
-            if (!_sliding && IsGrounded())
+            if (!_sliding)
             {
                 StartCoroutine(Slide());
             }
@@ -116,7 +115,8 @@ namespace SkibidiRunner
 
         private void PlayerJump(InputAction.CallbackContext context)
         {
-            if (!IsGrounded()) return;
+            if (!IsGrounded() && (!_sliding || !IsGrounded(1f))) return;
+            _playerVelocity.y = 0;
             _playerVelocity.y += Mathf.Sqrt(jumpHeight * _gravity * -3f);
             animator.Play(_jumpAnimationId);
         }
@@ -124,6 +124,7 @@ namespace SkibidiRunner
         private IEnumerator Slide()
         {
             _sliding = true;
+            _playerVelocity.y -= Mathf.Sqrt(jumpHeight * _gravity * -3f);
             // Shrink the collider
             Vector3 originalControllerCenter = _controller.center;
             Vector3 newControllerCenter = originalControllerCenter;
@@ -154,11 +155,9 @@ namespace SkibidiRunner
 
         private void GameOver()
         {
-            Debug.Log("Game Over!");
             animator.Play(_deathAnimationId);
             GameOverEvent?.Invoke();
             enabled = false;
-            //gameObject.SetActive(false);
         }
 
         private Vector3? CheckTurn(float turnValue)
@@ -187,9 +186,6 @@ namespace SkibidiRunner
             var forward = transform1.forward;
             raycastOriginFirst -= forward * .2f;
             raycastOriginSecond += forward * .2f;
-
-            //Debug.DrawLine(raycastOriginFirst, raycastOriginFirst - Vector3.down * length, Color.green, 2f);
-            //Debug.DrawLine(raycastOriginSecond, raycastOriginFirst - Vector3.down * length, Color.red, 2f);
 
             return Physics.Raycast(raycastOriginFirst, Vector3.down, out var hit, length, groundLayer) ||
                    Physics.Raycast(raycastOriginSecond, Vector3.down, out var hit2, length, groundLayer);
