@@ -248,8 +248,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileStartCount: 5
-  minimumStraightTiles: 3
-  maximumStraightTiles: 13
+  minimumStraightTiles: 2
+  maximumStraightTiles: 12
+  frequencyObstacle: 0.55
   startingTile: {fileID: 7270030239991754380, guid: 50a7756a8e2f0f14787d70ef66f51488,
     type: 3}
   turnstilePrefabs:
@@ -599,7 +600,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.000011443844, y: -125}
+  m_AnchoredPosition: {x: -0.000011443844, y: 0}
   m_SizeDelta: {x: 1980, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &413385144
@@ -1069,7 +1070,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -178}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 799.268, y: 356.755}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &866119329
@@ -1543,7 +1544,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 100}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1306408894
@@ -1676,7 +1677,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -300}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1980, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1535993851

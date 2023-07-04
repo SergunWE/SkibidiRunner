@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using TempleRun;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace SkibidiRunner
 {
@@ -10,6 +9,7 @@ namespace SkibidiRunner
         [SerializeField] private int tileStartCount = 5;
         [SerializeField] private int minimumStraightTiles = 3;
         [SerializeField] private int maximumStraightTiles = 20;
+        [SerializeField] [Range(0, 1)] private float frequencyObstacle = 0.5f;
         [SerializeField] private GameObject startingTile;
         [SerializeField] private List<GameObject> turnstilePrefabs;
         [SerializeField] private List<GameObject> obstaclePrefabs;
@@ -18,17 +18,12 @@ namespace SkibidiRunner
         private Vector3 _currentTileDirection = Vector3.forward;
         private List<Tile> _currentTiles;
         private List<GameObject> _currentObstacles;
-
         private Tile _prevTile;
-        private Renderer _prevTileRenderer;
-
-        private BoxCollider _startingTileBoxCollider;
 
         public override void Initialize()
         {
             _currentTiles = new List<Tile>();
             _currentObstacles = new List<GameObject>();
-            _startingTileBoxCollider = startingTile.GetComponent<BoxCollider>();
 
             for (int i = 0; i < tileStartCount; i++)
             {
@@ -43,19 +38,6 @@ namespace SkibidiRunner
             _currentTileDirection = direction;
             DeletePreviousTiles();
             DeletePreviousObstacle();
-            // Vector3 tilePlacementScale;
-            // if (_prevTile.type == TileType.Sideways)
-            // {
-            //     tilePlacementScale = Vector3.Scale(_prevTileRenderer.bounds.size / 2 + (Vector3.one *
-            //         _startingTileBoxCollider.size.z / 2), _currentTileDirection);
-            // }
-            // else
-            // {
-            //     tilePlacementScale = Vector3.Scale((_prevTileRenderer.bounds.size - (Vector3.one * 2)
-            //         ) + (Vector3.one * _startingTileBoxCollider.size.z / 2), _currentTileDirection);
-            // }
-            
-            //_currentTileLocation += _prevTile.size;
             _currentTileLocation = _prevTile.pivot.position + _currentTileDirection * _prevTile.size;
             int currentPathLength = Random.Range(minimumStraightTiles, maximumStraightTiles);
             for (int i = 0; i < currentPathLength; i++) 
@@ -92,7 +74,6 @@ namespace SkibidiRunner
                                   Quaternion.LookRotation(_currentTileDirection, Vector3.up);
             var newTile = Instantiate(tile.gameObject, _currentTileLocation, newTileRotation);
             _prevTile = newTile.GetComponent<Tile>();
-            _prevTileRenderer = _prevTile.GetComponentInChildren<Renderer>();
             _currentTiles.Add(_prevTile);
             
             if(spawnObstacle) SpawnObstacle();
@@ -101,13 +82,12 @@ namespace SkibidiRunner
             if (_prevTile.type == TileType.Straight)
             {
                 _currentTileLocation += _currentTileDirection * _prevTile.size;
-                //Vector3.Scale(_prevTile.size * Vector3.forward, _currentTileDirection);
             }
         }
         
         private void SpawnObstacle()
         {
-            if (Random.value > 0.4f) return;
+            if (Random.value > frequencyObstacle) return;
             GameObject obstaclePrefab = obstaclePrefabs.GetRandomItem();
             Quaternion newObjectRotation  = obstaclePrefab.gameObject.transform.rotation * Quaternion.LookRotation(_currentTileDirection, Vector3.up);
             GameObject obstacle = Instantiate(obstaclePrefab, _currentTileLocation, newObjectRotation);
