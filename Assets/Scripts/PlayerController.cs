@@ -165,11 +165,11 @@ namespace SkibidiRunner
             int size = Physics.OverlapSphereNonAlloc(transform.position, .1f, _hitColliders, turnLayer);
             if (size == 0) return null;
             var tile = _hitColliders[0].transform.parent.GetComponent<Tile>();
-            var type = tile.type;
+            var type = tile.Type;
             if ((type == TileType.Left && turnValue == -1) || (type == TileType.Right && turnValue == 1) ||
                 (type == TileType.Sideways))
             {
-                return tile.pivot.position;
+                return tile.Pivot.position;
             }
 
             return null;

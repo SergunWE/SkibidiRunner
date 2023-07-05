@@ -2,7 +2,7 @@
 
 namespace SkibidiRunner.Music
 {
-    [CreateAssetMenu(menuName = "Music/Game Music")]
+    [CreateAssetMenu(menuName = "Game/Game Music")]
     public class GameMusic : ScriptableObject
     {
         [field:SerializeField] public AudioClip Song { get; private set; }

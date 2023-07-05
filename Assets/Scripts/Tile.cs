@@ -14,9 +14,9 @@ public enum TileType {
 /// </summary>
 public class Tile : MonoBehaviour
 {
-    public TileType type;
-    public Transform pivot;
-    public float size;
+    [field:SerializeField] public TileType Type { get; private set; }
+    [field:SerializeField] public Transform Pivot { get; private set; }
+    [field:SerializeField] public float Size { get; private set; }
 }
 
 }

@@ -132,9 +132,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d62634e321fc83418b343b60162b9f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
-  pivot: {fileID: 0}
-  size: 12
+  <Type>k__BackingField: 0
+  <Pivot>k__BackingField: {fileID: 0}
+  <Size>k__BackingField: 12
 --- !u!1001 &1836220825280361153
 PrefabInstance:
   m_ObjectHideFlags: 0
