@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0f55c45b0aca4cd44ab43d71325d5257
+guid: fb46b84f6dc67fd408c4d4fc1760e6a0
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,28 +7,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Eye1Mat
+      name: Body1Mtl
+    second: {fileID: 2100000, guid: 8d0fc482775971d4994301209ea22b25, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Eye1Mtl
     second: {fileID: 2100000, guid: 3d465be8318d5ab4fa86e221885bd1ac, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Eye2Mat
-    second: {fileID: 2100000, guid: 3d465be8318d5ab4fa86e221885bd1ac, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Skibidit1Mat
-    second: {fileID: 2100000, guid: 214d574f0a35ee04ba4d10e377bd70ff, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Torso1Mat
-    second: {fileID: 2100000, guid: 47433da6825e15f4697e74e7cceaaae8, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Water1Mat
-    second: {fileID: 2100000, guid: 47433da6825e15f4697e74e7cceaaae8, type: 2}
+      name: NormalToilet1Mtl
+    second: {fileID: 2100000, guid: c30f5dbbe83722040b36a8a8355b94d2, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -49,7 +39,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
