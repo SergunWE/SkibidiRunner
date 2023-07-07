@@ -1,31 +1,40 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using SkibidiRunner.GameMap;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace SkibidiRunner
 {
     public class ScoreManager : MonoBehaviourInitializable
     {
-        [SerializeField] private float scoreMultiplier;
+        [SerializeField] private GameMapSetup gameMapSetup;
         [SerializeField] private UnityEvent<int> scoreEvent;
+        
+        private float _scoreMultiplier;
         private float _score;
-        private bool _init;
 
         public override void Initialize()
         {
-            _init = true;
-        }
-        
-        private void Update()
-        {
-            if(!_init) return;
-            _score += scoreMultiplier * Time.deltaTime;
-            scoreEvent?.Invoke((int)_score);
+            _scoreMultiplier = gameMapSetup.ScoreMultiplier;
+            StopAllCoroutines();
+            StartCoroutine(ScoreMeter());
         }
 
         public void GameOver()
         {
+            StopAllCoroutines();
             scoreEvent?.Invoke((int)_score);
-            gameObject.SetActive(false);
+        }
+
+        private IEnumerator ScoreMeter()
+        {
+            while (true)
+            {
+                _score += _scoreMultiplier * Time.deltaTime;
+                scoreEvent?.Invoke((int)_score);
+                yield return null;
+            }
+            // ReSharper disable once IteratorNeverReturns
         }
     }
 }

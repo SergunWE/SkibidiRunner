@@ -20,5 +20,7 @@ namespace SkibidiRunner.GameMap
         [field: SerializeField] public float IncreaseSpeedTime { get; private set; }
         [field: SerializeField] public float ObstacleFrequency { get; private set; }
         [field: SerializeField] public float IncreasedFrequencyObstacles { get; private set; }
+        
+        [field: SerializeField] public float ScoreMultiplier { get; private set; }
     }
 }
