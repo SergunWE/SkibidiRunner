@@ -18,12 +18,10 @@ MonoBehaviour:
   <WithoutObstaclesTile>k__BackingField: 2
   <StraightTilePrefab>k__BackingField: {fileID: 5680116188410879156, guid: 50a7756a8e2f0f14787d70ef66f51488,
     type: 3}
-  <LeftTilePrefab>k__BackingField: {fileID: 8997136381197051915, guid: 57a0c77d40fb7f64f88c73e669bd75d0,
-    type: 3}
-  <RightTilePrefab>k__BackingField: {fileID: 3341987877426231989, guid: d1bc38dd49605864690bd11be3a4da2a,
-    type: 3}
-  <SidewaysTilePrefab>k__BackingField: {fileID: 4163924903548961238, guid: 406d087854fa4cf4ba1b09b5571e98e9,
-    type: 3}
+  <TurnstileTiles>k__BackingField:
+  - {fileID: 8997136381197051915, guid: 57a0c77d40fb7f64f88c73e669bd75d0, type: 3}
+  - {fileID: 3341987877426231989, guid: d1bc38dd49605864690bd11be3a4da2a, type: 3}
+  - {fileID: 4163924903548961238, guid: 406d087854fa4cf4ba1b09b5571e98e9, type: 3}
   <ObstaclesPrefab>k__BackingField:
   - {fileID: 5132077226956630488, guid: 7acef6c3f1b5d6f45b162045d394132f, type: 3}
   - {fileID: 8045698178661533246, guid: 155f450bb33de2c4f96d377dba80b194, type: 3}

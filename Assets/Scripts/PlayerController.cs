@@ -2,6 +2,7 @@
 using System.Collections;
 using TempleRun;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 namespace SkibidiRunner
@@ -17,8 +18,8 @@ namespace SkibidiRunner
         [SerializeField] private LayerMask obstacleLayer;
         [SerializeField] private Animator animator;
 
-        public Action<Vector3> TurnEvent { private get; set; }
-        public Action GameOverEvent { private get; set; }
+        public UnityEvent TurnEvent { private get; set; }
+        public UnityEvent GameOverEvent { private get; set; }
 
         private float _playerSpeed;
         private float _gravity;
@@ -87,6 +88,13 @@ namespace SkibidiRunner
             _controller.Move(_playerVelocity * Time.deltaTime);
         }
 
+        public void ChangePosition(Vector3 position)
+        {
+            _controller.enabled = false;
+            transform.position = position;
+            _controller.enabled = true;
+        }
+
         private void PlayerTurn(InputAction.CallbackContext context)
         {
             float contextValue = context.ReadValue<float>();
@@ -94,10 +102,7 @@ namespace SkibidiRunner
             var turnPosition = CheckTurn(contextValue);
             if (turnPosition.HasValue)
             {
-                var targetDirection = Quaternion.AngleAxis(90 * context.ReadValue<float>(), Vector3.up) *
-                                      _movementDirection;
-                TurnEvent?.Invoke(targetDirection);
-                Turn(contextValue, turnPosition.Value);
+                TurnEvent?.Invoke();
             }
             else
             {
@@ -138,19 +143,6 @@ namespace SkibidiRunner
             _controller.height *= 2;
             _controller.center = originalControllerCenter;
             _sliding = false;
-        }
-
-        private void Turn(float turnValue, Vector3 turnPosition)
-        {
-            var transform1 = transform;
-            var tempPlayerPosition = new Vector3(turnPosition.x, transform1.position.y, turnPosition.z);
-            _controller.enabled = false;
-            transform1.position = tempPlayerPosition;
-            _controller.enabled = true;
-            var targetRotation = transform1.rotation * Quaternion.Euler(0, 90 * turnValue, 0);
-            var transform2 = transform;
-            transform2.rotation = targetRotation;
-            _movementDirection = transform2.forward.normalized;
         }
 
         private void GameOver()

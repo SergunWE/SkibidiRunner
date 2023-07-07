@@ -13,9 +13,7 @@ namespace SkibidiRunner.GameMap
         [field: SerializeField] public int WithoutObstaclesTile { get; private set; }
         
         [field: SerializeField] public Tile StraightTilePrefab { get; private set; }
-        [field: SerializeField] public Tile LeftTilePrefab { get; private set; }
-        [field: SerializeField] public Tile RightTilePrefab { get; private set; }
-        [field: SerializeField] public Tile SidewaysTilePrefab { get; private set; }
+        [field: SerializeField] public List<Tile> TurnstileTiles { get; private set; }
         [field: SerializeField] public List<Obstacle> ObstaclesPrefab { get; private set; }
         
         [field: SerializeField] public float InitialSpeedTime { get; private set; }

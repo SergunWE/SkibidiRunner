@@ -1,3 +1,5 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace TempleRun {
@@ -12,6 +14,7 @@ public enum TileType {
 /// <summary>
 /// Defines the attributes of a tile.
 /// </summary>
+[Serializable]
 public class Tile : MonoBehaviour
 {
     [field:SerializeField] public TileType Type { get; private set; }

@@ -60,9 +60,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d62634e321fc83418b343b60162b9f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
-  pivot: {fileID: 8795145022663253240}
-  size: 24
+  <Type>k__BackingField: 1
+  <Pivot>k__BackingField: {fileID: 8795145022663253240}
+  <Size>k__BackingField: 24
 --- !u!1 &3965691653159416084
 GameObject:
   m_ObjectHideFlags: 0
