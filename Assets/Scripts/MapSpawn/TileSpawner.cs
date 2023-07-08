@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using SkibidiRunner.GameMap;
 using SkibidiRunner.ReadOnly;
 using TempleRun;
 using UnityEngine;
 using UnityEngine.Events;
+using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
 namespace SkibidiRunner.MapSpawn
@@ -19,7 +21,6 @@ namespace SkibidiRunner.MapSpawn
         [SerializeField] [ReadOnly] private List<Tile> turnTiles;
         [SerializeField] [ReadOnly] private List<GameObject> obstacles;
 
-        private GameObject _currentTurnTile;
         private float _straightSize;
         private int _minimumTiles;
         private int _maximumTiles;
@@ -27,6 +28,9 @@ namespace SkibidiRunner.MapSpawn
         private float _obstacleFrequency;
         private float _increasedFrequencyObstacles;
         private int _withoutObstaclesTile;
+
+        private GameObject _currentTurnTile;
+        private readonly List<GameObject> _activeObstacles = new();
 
         [ContextMenu("Generate map items")]
         private void GenerateMapItems()
@@ -47,6 +51,7 @@ namespace SkibidiRunner.MapSpawn
                     var obstacle = Instantiate(obstaclePrefab, currentSpawnPosition,
                         startSpawnPosition.rotation).gameObject;
                     obstacle.name += index;
+                    obstacle.SetActive(false);
                     obstacles.Add(obstacle);
                 }
 
@@ -57,6 +62,7 @@ namespace SkibidiRunner.MapSpawn
             {
                 turnTiles.Add(Instantiate(tile, currentSpawnPosition,
                     startSpawnPosition.rotation * tile.transform.rotation));
+                turnTiles[^1].gameObject.SetActive(false);
             }
         }
 
@@ -106,6 +112,7 @@ namespace SkibidiRunner.MapSpawn
 
         public override void Initialize()
         {
+            var stopwatch = Stopwatch.StartNew();
             _straightSize = gameMapSetup.StraightTilePrefab.Size;
             _minimumTiles = gameMapSetup.MinimumTile;
             _maximumTiles = gameMapSetup.MaximumTile;
@@ -114,12 +121,8 @@ namespace SkibidiRunner.MapSpawn
             _increasedFrequencyObstacles = gameMapSetup.IncreasedFrequencyObstacles;
             _withoutObstaclesTile = gameMapSetup.WithoutObstaclesTile;
 
-            foreach (var turnTile in turnTiles)
-            {
-                turnTile.gameObject.SetActive(false);
-            }
-
             SpawnTiles(gameMapSetup.InitialTile);
+            Debug.Log($"{nameof(TileSpawner)} init {stopwatch.ElapsedMilliseconds}ms");
         }
 
         public void AddNewTiles()
@@ -144,13 +147,14 @@ namespace SkibidiRunner.MapSpawn
             _currentTurnTile = turnstileTile.gameObject;
             _currentTurnTile.SetActive(true);
 
-            Debug.Log($"Tiles {count} - player offset {_maximumTiles - count}");
+            //Debug.Log($"Tiles {count} - player offset {_maximumTiles - count}");
 
-            foreach (var obstacle in obstacles)
+            for (int i = _activeObstacles.Count - 1; i >= 0 ; i--)
             {
-                obstacle.SetActive(false);
+                _activeObstacles[i].SetActive(false);
+                _activeObstacles.RemoveAt(i);
             }
-            
+
             if (spawnObstacle)
             {
                 for (int i = _maximumTiles - count + _withoutObstaclesTile; i < _maximumTiles; i++)
@@ -158,6 +162,7 @@ namespace SkibidiRunner.MapSpawn
                     float probability = Random.Range(0f, 1f);
                     if (!(probability < _obstacleFrequency)) continue;
                     int index = i * _obstacleCount + Random.Range(0, _obstacleCount);
+                    _activeObstacles.Add(obstacles[index]);
                     obstacles[index].SetActive(true);
                 } 
             }

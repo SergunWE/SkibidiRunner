@@ -81,7 +81,18 @@
                 {
                     "name": "",
                     "id": "b9e9a6c7-12d2-4150-b390-da992d153b30",
-                    "path": "<Keyboard>/leftArrow",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Slide",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "03f0fae3-05be-4bfa-af85-a3d16dac65c7",
+                    "path": "<Keyboard>/leftCtrl",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

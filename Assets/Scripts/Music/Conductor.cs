@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Diagnostics;
+using UnityEngine;
 using UnityEngine.Events;
+using Debug = UnityEngine.Debug;
 
 namespace SkibidiRunner.Music
 {
@@ -23,12 +25,14 @@ namespace SkibidiRunner.Music
 
         public override void Initialize()
         {
+            var stopwatch = Stopwatch.StartNew();
             _songBpm = gameMusic.SongBpm;
             _secPerBeat = 60f / _songBpm;
             _dspSongTime = (float)AudioSettings.dspTime - gameMusic.FirstBeatOffset;
             musicSource.clip = gameMusic.Song;
             musicSource.Play();
             _init = true;
+            Debug.Log($"{nameof(Conductor)} init {stopwatch.ElapsedMilliseconds}ms");
         }
         
         private void Update()
