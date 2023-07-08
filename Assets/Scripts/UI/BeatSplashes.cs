@@ -6,6 +6,7 @@ namespace SkibidiRunner.UI
     public class BeatSplashes : MonoBehaviour
     {
         [SerializeField] private int splashStep;
+        [SerializeField] private float splashSize = 2;
 
         private int _beatNumber;
         private Transform _transform;
@@ -24,7 +25,7 @@ namespace SkibidiRunner.UI
         {
             if (_beatNumber == splashStep)
             {
-                _transform.localScale = Vector3.one * 2;
+                _transform.localScale = Vector3.one * splashSize;
                 _beatNumber = -1;
             }
 
