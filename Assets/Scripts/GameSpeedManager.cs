@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SkibidiRunner
 {
-    public class DifficultManager : MonoBehaviourInitializable
+    public class GameSpeedManager : MonoBehaviourInitializable
     {
         [SerializeField] private GameMapSetup gameMapSetup;
         private float _speedChangeRate;
@@ -14,7 +14,7 @@ namespace SkibidiRunner
             _speedChangeRate = gameMapSetup.IncreaseSpeedTime;
         }
 
-        public void IncreaseTheDifficulty()
+        public void IncreaseSpeed()
         {
             Time.timeScale += _speedChangeRate;
         }
