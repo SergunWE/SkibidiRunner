@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using TempleRun;
 using UnityEngine;
 using UnityEngine.Events;
@@ -23,7 +22,6 @@ namespace SkibidiRunner
 
         private float _playerSpeed;
         private float _gravity;
-        private Vector3 _movementDirection = Vector3.forward;
         private PlayerInput _playerInput;
         private InputAction _turnAction;
         private InputAction _jumpAction;
@@ -36,8 +34,10 @@ namespace SkibidiRunner
         private int _deathAnimationId;
 
         private readonly Collider[] _hitColliders = new Collider[5];
+        private Vector3 _originalControllerCenter;
+        private float _originalControllerHeight;
 
-        private void Awake()
+        public void Awake()
         {
             _playerInput = GetComponent<PlayerInput>();
             _controller = GetComponent<CharacterController>();
@@ -47,6 +47,8 @@ namespace SkibidiRunner
             _turnAction = _playerInput.actions["Turn"];
             _jumpAction = _playerInput.actions["Jump"];
             _slideAction = _playerInput.actions["Slide"];
+            _originalControllerCenter = _controller.center;
+            _originalControllerHeight = _controller.height;
         }
 
         private void Start()
@@ -147,6 +149,8 @@ namespace SkibidiRunner
 
         private void GameOver()
         {
+            _controller.height = _originalControllerHeight;
+            _controller.center = _originalControllerCenter;
             animator.Play(_deathAnimationId);
             GameOverEvent?.Invoke();
             enabled = false;

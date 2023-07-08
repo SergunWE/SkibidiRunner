@@ -21,9 +21,9 @@ namespace SkibidiRunner
             cinemachineVirtualCamera.Follow = currentPlayerGameObject.transform;
             cinemachineVirtualCamera.LookAt = currentPlayerGameObject.transform;
             _currentPlayerController = currentPlayerGameObject.GetComponentInChildren<PlayerController>();
-
             _currentPlayerController.TurnEvent = turnEvent;
             _currentPlayerController.GameOverEvent = gameOverEvent;
+            _currentPlayerController.Awake();
         }
 
         public void OnTilesAdded(Vector3 playerPosition)
