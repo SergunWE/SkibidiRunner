@@ -19,6 +19,8 @@ namespace SkibidiRunner.Player
 
         public UnityEvent TurnEvent { private get; set; }
         public UnityEvent GameOverEvent { private get; set; }
+        public UnityEvent JumpEvent { private get; set; }
+        public UnityEvent SlidingEvent { private get; set; }
 
         private float _playerSpeed;
         private float _gravity;
@@ -114,10 +116,9 @@ namespace SkibidiRunner.Player
 
         private void PlayerSlide(InputAction.CallbackContext context)
         {
-            if (!_sliding)
-            {
-                StartCoroutine(Slide());
-            }
+            if (_sliding) return;
+            StartCoroutine(Slide());
+            SlidingEvent?.Invoke();
         }
 
         private void PlayerJump(InputAction.CallbackContext context)
@@ -126,6 +127,7 @@ namespace SkibidiRunner.Player
             _playerVelocity.y = 0;
             _playerVelocity.y += Mathf.Sqrt(jumpHeight * _gravity * -3f);
             animator.Play(_jumpAnimationId);
+            JumpEvent?.Invoke();
         }
 
         private IEnumerator Slide()

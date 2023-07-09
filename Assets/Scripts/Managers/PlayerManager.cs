@@ -15,6 +15,8 @@ namespace SkibidiRunner.Managers
 
         [SerializeField] private UnityEvent turnEvent;
         [SerializeField] private UnityEvent gameOverEvent;
+        [SerializeField] private UnityEvent jumpEvent;
+        [SerializeField] private UnityEvent slidingEvent;
 
         private PlayerController _currentPlayerController;
 
@@ -27,6 +29,8 @@ namespace SkibidiRunner.Managers
             _currentPlayerController = currentPlayerGameObject.GetComponentInChildren<PlayerController>();
             _currentPlayerController.TurnEvent = turnEvent;
             _currentPlayerController.GameOverEvent = gameOverEvent;
+            _currentPlayerController.JumpEvent = jumpEvent;
+            _currentPlayerController.SlidingEvent = slidingEvent;
             _currentPlayerController.Awake();
             Debug.Log($"{nameof(PlayerManager)} init {stopwatch.ElapsedMilliseconds}ms");
         }
