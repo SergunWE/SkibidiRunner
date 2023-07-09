@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace SkibidiRunner
+namespace SkibidiRunner.Managers
 {
     public class Bootstrap : MonoBehaviour
     {

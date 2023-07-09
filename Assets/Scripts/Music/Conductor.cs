@@ -1,4 +1,6 @@
 ﻿using System.Diagnostics;
+using SkibidiRunner.Managers;
+using SkibidiRunner.Map;
 using UnityEngine;
 using UnityEngine.Events;
 using Debug = UnityEngine.Debug;
@@ -7,7 +9,7 @@ namespace SkibidiRunner.Music
 {
     public class Conductor : MonoBehaviourInitializable
     {
-        [SerializeField] private GameMusic gameMusic;
+        [SerializeField] private CurrentSetup gameMusic;
         [SerializeField] private AudioSource musicSource;
 
         private float _songPositionInBeats;
@@ -26,10 +28,11 @@ namespace SkibidiRunner.Music
         public override void Initialize()
         {
             var stopwatch = Stopwatch.StartNew();
-            _songBpm = gameMusic.SongBpm;
+            var music = gameMusic.CurrentMusic;
+            _songBpm = music.SongBpm;
             _secPerBeat = 60f / _songBpm;
-            _dspSongTime = (float)AudioSettings.dspTime - gameMusic.FirstBeatOffset;
-            musicSource.clip = gameMusic.Song;
+            _dspSongTime = (float)AudioSettings.dspTime - music.FirstBeatOffset;
+            musicSource.clip = music.Song;
             musicSource.Play();
             _init = true;
             Debug.Log($"{nameof(Conductor)} init {stopwatch.ElapsedMilliseconds}ms");

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace DefaultNamespace
+namespace SkibidiRunner.MenuManagers
 {
     public class MainMenuManager : MonoBehaviour
     {

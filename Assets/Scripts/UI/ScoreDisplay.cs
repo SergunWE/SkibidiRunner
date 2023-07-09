@@ -2,7 +2,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace SkibidiRunner
+namespace SkibidiRunner.UI
 {
     [RequireComponent(typeof(TMP_Text))]
     public class ScoreDisplay : MonoBehaviour

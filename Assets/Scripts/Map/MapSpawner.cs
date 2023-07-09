@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using SkibidiRunner.GameMap;
+using SkibidiRunner.Managers;
 using SkibidiRunner.ReadOnly;
 using TempleRun;
 using UnityEngine;
@@ -9,11 +9,11 @@ using UnityEngine.Events;
 using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
-namespace SkibidiRunner.MapSpawn
+namespace SkibidiRunner.Map
 {
-    public class TileSpawner : MonoBehaviourInitializable
+    public class MapSpawner : MonoBehaviourInitializable
     {
-        [SerializeField] private GameMapSetup gameMapSetup;
+        [SerializeField] private CurrentSetup gameMapSetup;
         [SerializeField] private Transform startSpawnPosition;
         [SerializeField] private UnityEvent<Vector3> playerPositionEvent;
 
@@ -39,15 +39,15 @@ namespace SkibidiRunner.MapSpawn
 
             var currentSpawnPosition = startSpawnPosition.position;
 
-            for (int i = gameMapSetup.MaximumTile; i > 0; i--)
+            for (int i = gameMapSetup.GameMapSetup.MaximumTile; i > 0; i--)
             {
-                var tile = Instantiate(gameMapSetup.StraightTilePrefab, currentSpawnPosition,
+                var tile = Instantiate(gameMapSetup.GameMapSetup.StraightTilePrefab, currentSpawnPosition,
                     startSpawnPosition.rotation);
                 straightTiles.Add(tile);
 
-                foreach (var obstaclePrefab in gameMapSetup.ObstaclesPrefab)
+                foreach (var obstaclePrefab in gameMapSetup.GameMapSetup.ObstaclesPrefab)
                 {
-                    int index = gameMapSetup.MaximumTile - i;
+                    int index = gameMapSetup.GameMapSetup.MaximumTile - i;
                     var obstacle = Instantiate(obstaclePrefab, currentSpawnPosition,
                         startSpawnPosition.rotation).gameObject;
                     obstacle.name += index;
@@ -58,7 +58,7 @@ namespace SkibidiRunner.MapSpawn
                 currentSpawnPosition += startSpawnPosition.forward * tile.Size;
             }
 
-            foreach (var tile in gameMapSetup.TurnstileTiles)
+            foreach (var tile in gameMapSetup.GameMapSetup.TurnstileTiles)
             {
                 turnTiles.Add(Instantiate(tile, currentSpawnPosition,
                     startSpawnPosition.rotation * tile.transform.rotation));
@@ -113,16 +113,17 @@ namespace SkibidiRunner.MapSpawn
         public override void Initialize()
         {
             var stopwatch = Stopwatch.StartNew();
-            _straightSize = gameMapSetup.StraightTilePrefab.Size;
-            _minimumTiles = gameMapSetup.MinimumTile;
-            _maximumTiles = gameMapSetup.MaximumTile;
-            _obstacleCount = gameMapSetup.ObstaclesPrefab.Count;
-            _obstacleFrequency = gameMapSetup.ObstacleFrequency;
-            _increasedFrequencyObstacles = gameMapSetup.IncreasedFrequencyObstacles;
-            _withoutObstaclesTile = gameMapSetup.WithoutObstaclesTile;
+            var setup = gameMapSetup.GameMapSetup;
+            _straightSize = setup.StraightTilePrefab.Size;
+            _minimumTiles = setup.MinimumTile;
+            _maximumTiles = setup.MaximumTile;
+            _obstacleCount = setup.ObstaclesPrefab.Count;
+            _obstacleFrequency = setup.ObstacleFrequency;
+            _increasedFrequencyObstacles = setup.IncreasedFrequencyObstacles;
+            _withoutObstaclesTile = setup.WithoutObstaclesTile;
 
-            SpawnTiles(gameMapSetup.InitialTile);
-            Debug.Log($"{nameof(TileSpawner)} init {stopwatch.ElapsedMilliseconds}ms");
+            SpawnTiles(setup.InitialTile);
+            Debug.Log($"{nameof(MapSpawner)} init {stopwatch.ElapsedMilliseconds}ms");
         }
 
         public void AddNewTiles()

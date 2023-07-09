@@ -1,13 +1,13 @@
 ﻿using System.Collections;
-using SkibidiRunner.GameMap;
+using SkibidiRunner.Map;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace SkibidiRunner
+namespace SkibidiRunner.Managers
 {
     public class ScoreManager : MonoBehaviourInitializable
     {
-        [SerializeField] private GameMapSetup gameMapSetup;
+        [SerializeField] private CurrentSetup gameMapSetup;
         [SerializeField] private UnityEvent<int> scoreEvent;
         
         private float _scoreMultiplier;
@@ -15,7 +15,7 @@ namespace SkibidiRunner
 
         public override void Initialize()
         {
-            _scoreMultiplier = gameMapSetup.ScoreMultiplier;
+            _scoreMultiplier = gameMapSetup.GameMapSetup.ScoreMultiplier;
             StopAllCoroutines();
             StartCoroutine(ScoreMeter());
         }

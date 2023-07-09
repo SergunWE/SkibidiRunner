@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace SkibidiRunner
+namespace SkibidiRunner.Managers
 {
     public abstract class MonoBehaviourInitializable : MonoBehaviour
     {

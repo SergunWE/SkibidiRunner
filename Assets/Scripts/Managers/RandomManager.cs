@@ -1,7 +1,7 @@
 ﻿using System;
 using Random = UnityEngine.Random;
 
-namespace SkibidiRunner
+namespace SkibidiRunner.Managers
 {
     public class RandomManager : MonoBehaviourInitializable
     {

@@ -1,10 +1,11 @@
 ﻿using System.Diagnostics;
 using Cinemachine;
+using SkibidiRunner.Player;
 using UnityEngine;
 using UnityEngine.Events;
 using Debug = UnityEngine.Debug;
 
-namespace SkibidiRunner
+namespace SkibidiRunner.Managers
 {
     public class PlayerManager : MonoBehaviourInitializable
     {

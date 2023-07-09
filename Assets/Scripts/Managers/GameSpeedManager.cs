@@ -1,17 +1,18 @@
-﻿using SkibidiRunner.GameMap;
+﻿using SkibidiRunner.Map;
 using UnityEngine;
 
-namespace SkibidiRunner
+namespace SkibidiRunner.Managers
 {
     public class GameSpeedManager : MonoBehaviourInitializable
     {
-        [SerializeField] private GameMapSetup gameMapSetup;
+        [SerializeField] private CurrentSetup gameMapSetup;
         private float _speedChangeRate;
         
         public override void Initialize()
         {
-            Time.timeScale = gameMapSetup.InitialSpeedTime;
-            _speedChangeRate = gameMapSetup.IncreaseSpeedTime;
+            var setup = gameMapSetup.GameMapSetup;
+            Time.timeScale = setup.InitialSpeedTime;
+            _speedChangeRate = setup.IncreaseSpeedTime;
         }
 
         public void IncreaseSpeed()
@@ -21,7 +22,7 @@ namespace SkibidiRunner
 
         public void GameOver()
         {
-            Time.timeScale = gameMapSetup.InitialSpeedTime;
+            Time.timeScale = gameMapSetup.GameMapSetup.InitialSpeedTime;
         }
     }
 }

@@ -2,7 +2,7 @@
 using TempleRun;
 using UnityEngine;
 
-namespace SkibidiRunner.GameMap
+namespace SkibidiRunner.Map
 {
     [CreateAssetMenu(menuName = "Game/Game Map Setup")]
     public class GameMapSetup : ScriptableObject
