@@ -8,9 +8,9 @@ namespace SkibidiRunner.Map
     public class CurrentSetup : MonoBehaviourInitializable
     {
         [field:SerializeField] public GameMapSetup GameMapSetup { get; private set; }
-        [SerializeField] private List<GameMusic> gameMusics;
+        [SerializeField] protected List<GameMusic> gameMusics;
         
-        public GameMusic CurrentMusic { get; private set; }
+        public GameMusic CurrentMusic { get; protected set; }
         private int _currentMusicIndex;
         
         public override void Initialize()
