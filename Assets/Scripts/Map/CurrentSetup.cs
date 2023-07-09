@@ -2,6 +2,7 @@
 using SkibidiRunner.Managers;
 using SkibidiRunner.Music;
 using UnityEngine;
+using YandexSDK.Scripts;
 
 namespace SkibidiRunner.Map
 {
@@ -16,7 +17,7 @@ namespace SkibidiRunner.Map
         public override void Initialize()
         {
             //todo get in YandexSDK
-            _currentMusicIndex = 1;
+            _currentMusicIndex = LocalYandexData.Instance.SelectedMusic;
             
             CurrentMusic = gameMusics[_currentMusicIndex];
         }

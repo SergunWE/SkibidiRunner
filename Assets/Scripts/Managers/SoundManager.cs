@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using YandexSDK.Scripts;
 
 namespace SkibidiRunner.Managers
 {
@@ -10,9 +11,7 @@ namespace SkibidiRunner.Managers
         
         public override void Initialize()
         {
-            //todo get volume in yandexSDK
-            _volume = 1f;
-
+            _volume = LocalYandexData.Instance.SoundVolume;
             audioSource.volume = _volume;
         }
 

@@ -3,6 +3,7 @@ using SkibidiRunner.Managers;
 using SkibidiRunner.Map;
 using UnityEngine;
 using UnityEngine.Events;
+using YandexSDK.Scripts;
 using Debug = UnityEngine.Debug;
 
 namespace SkibidiRunner.Music
@@ -33,6 +34,7 @@ namespace SkibidiRunner.Music
             _secPerBeat = 60f / _songBpm;
             _dspSongTime = (float)AudioSettings.dspTime - music.FirstBeatOffset;
             musicSource.clip = music.Song;
+            musicSource.volume = LocalYandexData.Instance.MusicVolume;
             musicSource.Play();
             _init = true;
             Debug.Log($"{nameof(Conductor)} init {stopwatch.ElapsedMilliseconds}ms");
