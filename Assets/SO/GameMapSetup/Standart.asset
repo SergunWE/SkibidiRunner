@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Standart
   m_EditorClassIdentifier: 
   <InitialTile>k__BackingField: 5
-  <MinimumTile>k__BackingField: 3
-  <MaximumTile>k__BackingField: 10
-  <WithoutObstaclesTile>k__BackingField: 2
+  <MinimumTile>k__BackingField: 5
+  <MaximumTile>k__BackingField: 12
+  <WithoutObstaclesTile>k__BackingField: 3
   <StraightTilePrefab>k__BackingField: {fileID: 5680116188410879156, guid: 50a7756a8e2f0f14787d70ef66f51488,
     type: 3}
   <TurnstileTiles>k__BackingField:
@@ -26,7 +26,7 @@ MonoBehaviour:
   - {fileID: 5132077226956630488, guid: 7acef6c3f1b5d6f45b162045d394132f, type: 3}
   - {fileID: 8045698178661533246, guid: 155f450bb33de2c4f96d377dba80b194, type: 3}
   <InitialSpeedTime>k__BackingField: 1
-  <IncreaseSpeedTime>k__BackingField: 0.15
+  <IncreaseSpeedTime>k__BackingField: 0.12
   <ObstacleFrequency>k__BackingField: 0.45
   <IncreasedFrequencyObstacles>k__BackingField: 0.005
   <ScoreMultiplier>k__BackingField: 1
