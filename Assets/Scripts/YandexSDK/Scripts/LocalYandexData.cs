@@ -1,6 +1,6 @@
 ﻿namespace YandexSDK.Scripts
 {
-    public class LocalYandexData
+    public class LocalYandexData : ICloudData
     {
         private static LocalYandexData _instance;
         
