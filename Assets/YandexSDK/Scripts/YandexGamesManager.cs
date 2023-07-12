@@ -19,6 +19,18 @@ namespace YandexSDK.Scripts
         
         [DllImport("__Internal")]
         private static extern int getReviewStatus();
+        
+        [DllImport("__Internal")]
+        private static extern void savePlayerData(string data);
+        
+        [DllImport("__Internal")]
+        private static extern string loadPlayerData();
+        
+        [DllImport("__Internal")]
+        private static extern void setToLeaderboard(int value);
+        
+        [DllImport("__Internal")]
+        private static extern string getLang();
 
         /// <summary>
         /// User name on the Yandex Games platform
@@ -70,6 +82,63 @@ namespace YandexSDK.Scripts
         public static ReviewStatus GetReviewStatus()
         {
             return (ReviewStatus)getReviewStatus();
+        }
+
+        public static void SavePlayerData(PlayerData playerData)
+        {
+            try
+            {
+                string json = JsonUtility.ToJson(playerData);
+                savePlayerData(json);
+            }
+            catch
+            {
+                // ignored
+            }
+        }
+
+        public static PlayerData LoadPlayerData()
+        {
+            try
+            {
+                return JsonUtility.FromJson<PlayerData>(loadPlayerData());
+            }
+            catch (Exception)
+            {
+                return new PlayerData();
+            }
+            
+        }
+
+        public static void SetToLeaderboard(int value)
+        {
+            try
+            {
+                setToLeaderboard(value);
+            }
+            catch
+            {
+                // ignored
+            }
+        }
+
+        public static Language GetLanguage()
+        {
+            try
+            {
+                string lang = getLang();
+                return lang switch
+                {
+                    "ru" => Language.Russian,
+                    "tr" => Language.Turkey,
+                    _ => Language.English
+                };
+            }
+            catch (Exception)
+            {
+                return Language.English;
+            }
+            
         }
     }
 }

@@ -2,6 +2,7 @@
 using SkibidiRunner.Map;
 using UnityEngine;
 using UnityEngine.Events;
+using YandexSDK.Scripts;
 
 namespace SkibidiRunner.Managers
 {
@@ -24,6 +25,8 @@ namespace SkibidiRunner.Managers
         {
             StopAllCoroutines();
             scoreEvent?.Invoke((int)_score);
+            LocalYandexData.Instance.ScoreRecord = (int) _score;
+            YandexGamesManager.SetToLeaderboard((int) _score);
         }
 
         private IEnumerator ScoreMeter()

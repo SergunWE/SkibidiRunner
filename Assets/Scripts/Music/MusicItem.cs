@@ -1,7 +1,8 @@
-﻿using TMPro;
+﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
+using YandexSDK.Scripts;
 
 namespace SkibidiRunner.Music
 {
@@ -11,21 +12,30 @@ namespace SkibidiRunner.Music
         [field:SerializeField] public Button Button { get; private set; }
         [SerializeField] private TMP_Text buttonText;
 
+        private static readonly Dictionary<Language, string[]> Texts = new()
+        {
+            {Language.Russian, new[] {"Выбрать", "Набери", "Выбрано"}},
+            {Language.English, new[] {"Select", "Dial it up", "Selected"}},
+            {Language.Turkey, new[] {"Seçiniz", "Çevirin", "Seçilmiş"}}
+        };
+        
+        private readonly Language _language = YandexGamesManager.GetLanguage();
+
         public void Activate()
         {
-            buttonText.text = "Выбрать";
+            buttonText.text = Texts[_language][0];
             Button.interactable = true;
         }
 
         public void Deactivate()
         {
-            buttonText.text = $"Набери {RequiredNumberPoints}";
+            buttonText.text = $"{Texts[_language][1]} {RequiredNumberPoints}";
             Button.interactable = false;
         }
 
         public void Select()
         {
-            buttonText.text = "Выбрано";
+            buttonText.text = Texts[_language][2];
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using YandexSDK.Scripts;
 
@@ -10,6 +9,7 @@ namespace SkibidiRunner.Music
         [SerializeField] private List<MusicItem> musicItems;
 
         private MusicItem _selectedMusicItem;
+
         private void OnEnable()
         {
             int currentRecord = LocalYandexData.Instance.ScoreRecord;
@@ -43,7 +43,7 @@ namespace SkibidiRunner.Music
         private void OnMusicButtonClicked(int index)
         {
             if(musicItems.IndexOf(_selectedMusicItem) == index) return;
-            if(musicItems[index].RequiredNumberPoints <  LocalYandexData.Instance.ScoreRecord) return;
+            if(musicItems[index].RequiredNumberPoints >=  LocalYandexData.Instance.ScoreRecord) return;
             LocalYandexData.Instance.SelectedMusic = index;
             _selectedMusicItem.Activate();
             _selectedMusicItem = musicItems[index];
