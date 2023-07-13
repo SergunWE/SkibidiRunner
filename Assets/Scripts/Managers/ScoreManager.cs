@@ -20,7 +20,7 @@ namespace SkibidiRunner.Managers
             _scoreMultiplier = gameMapSetup.GameMapSetup.ScoreMultiplier;
             if (DateTime.UtcNow < LocalYandexData.Instance.EndTime50Adv)
             {
-                _scoreMultiplier += _scoreMultiplier * 0.5f;
+                _scoreMultiplier += _scoreMultiplier * 0.3f;
             }
             _score = LocalYandexData.Instance.BonusScore;
             StopAllCoroutines();
