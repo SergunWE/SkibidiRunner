@@ -32,22 +32,27 @@ namespace SkibidiRunner.Music
             var music = gameMusic.CurrentMusic;
             _songBpm = music.SongBpm;
             _secPerBeat = 60f / _songBpm;
-            _dspSongTime = (float)AudioSettings.dspTime - music.FirstBeatOffset;
             musicSource.clip = music.Song;
             musicSource.volume = LocalYandexData.Instance.MusicVolume;
             musicSource.Play();
-            _init = true;
             Debug.Log($"{nameof(Conductor)} init {stopwatch.ElapsedMilliseconds}ms");
         }
         
         private void Update()
         {
-            if(!_init) return;
-            _songPosition = (float)(AudioSettings.dspTime - _dspSongTime);
-            _songPositionInBeats = _songPosition / _secPerBeat;
-            if (_lastBeat >= (int) _songPositionInBeats) return;
-            _lastBeat = (int) _songPositionInBeats;
-            beat?.Invoke();
+            if (musicSource.isPlaying && !_init)
+            {
+                _dspSongTime = (float)AudioSettings.dspTime - gameMusic.CurrentMusic.FirstBeatOffset;
+                _init = true;
+            }
+            else
+            {
+                _songPosition = (float)(AudioSettings.dspTime - _dspSongTime);
+                _songPositionInBeats = _songPosition / _secPerBeat;
+                if (_lastBeat >= (int) _songPositionInBeats) return;
+                _lastBeat = (int) _songPositionInBeats;
+                beat?.Invoke();
+            }
         }
     }
 }

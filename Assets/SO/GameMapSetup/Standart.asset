@@ -28,5 +28,5 @@ MonoBehaviour:
   <InitialSpeedTime>k__BackingField: 1
   <IncreaseSpeedTime>k__BackingField: 0.12
   <ObstacleFrequency>k__BackingField: 0.45
-  <IncreasedFrequencyObstacles>k__BackingField: 0.005
+  <IncreasedFrequencyObstacles>k__BackingField: 0.01
   <ScoreMultiplier>k__BackingField: 1
