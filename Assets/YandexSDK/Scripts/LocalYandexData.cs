@@ -51,11 +51,11 @@
 
         private LocalYandexData()
         {
-            _playerData = YandexGamesManager.LoadPlayerData();
-            if (_playerData.NotFirst) return;
-            _playerData.MusicVolume = 1f;
-            _playerData.SoundVolume = 1f;
-            _playerData.NotFirst = true;
+            _playerData = YandexGamesManager.LoadPlayerData() ?? new PlayerData
+            {
+                MusicVolume = 0.5f,
+                SoundVolume = 0.5f
+            };
         }
 
         private void SaveData()

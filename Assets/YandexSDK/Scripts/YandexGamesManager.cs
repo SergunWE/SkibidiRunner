@@ -31,6 +31,9 @@ namespace YandexSDK.Scripts
         
         [DllImport("__Internal")]
         private static extern string getLang();
+        
+        [DllImport("__Internal")]
+        private static extern void helloString(string str);
 
         /// <summary>
         /// User name on the Yandex Games platform
@@ -91,9 +94,9 @@ namespace YandexSDK.Scripts
                 string json = JsonUtility.ToJson(playerData);
                 savePlayerData(json);
             }
-            catch
+            catch(Exception e)
             {
-                // ignored
+                helloString("SavePlayerData " + e);
             }
         }
 
@@ -101,11 +104,13 @@ namespace YandexSDK.Scripts
         {
             try
             {
-                return JsonUtility.FromJson<PlayerData>(loadPlayerData());
+                string json = loadPlayerData();
+                return JsonUtility.FromJson<PlayerData>(json);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return new PlayerData();
+                helloString("LoadPlayerData " + e);
+                return null;
             }
             
         }

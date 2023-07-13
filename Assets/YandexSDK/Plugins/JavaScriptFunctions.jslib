@@ -68,7 +68,7 @@ mergeInto(LibraryManager.library, {
   savePlayerData: function (data) {
     try {
       var dateString = UTF8ToString(data);
-      console.log(String(dateString));
+      console.log(dateString);
       var myobj = JSON.parse(dateString);
       player.setData(myobj);
     } catch (err) {
@@ -106,5 +106,9 @@ mergeInto(LibraryManager.library, {
       var buffer = _malloc(bufferSize);
       stringToUTF8(lang, buffer, bufferSize);
       return buffer;
+  },
+
+  helloString: function (str) {
+    window.alert(UTF8ToString(str));
   },
 });
