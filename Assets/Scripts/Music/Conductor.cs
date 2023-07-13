@@ -25,6 +25,7 @@ namespace SkibidiRunner.Music
         private float _dspSongTime;
 
         private bool _init;
+        private float _initDsp;
 
         public override void Initialize()
         {
@@ -34,13 +35,15 @@ namespace SkibidiRunner.Music
             _secPerBeat = 60f / _songBpm;
             musicSource.clip = music.Song;
             musicSource.volume = LocalYandexData.Instance.MusicVolume;
+            _initDsp = (float) AudioSettings.dspTime;
             musicSource.Play();
             Debug.Log($"{nameof(Conductor)} init {stopwatch.ElapsedMilliseconds}ms");
         }
         
         private void Update()
         {
-            if (musicSource.isPlaying && !_init)
+            if(_initDsp >= (float) AudioSettings.dspTime) return;
+            if (!_init)
             {
                 _dspSongTime = (float)AudioSettings.dspTime - gameMusic.CurrentMusic.FirstBeatOffset;
                 _init = true;

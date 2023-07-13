@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using SkibidiRunner.Map;
 using UnityEngine;
 using UnityEngine.Events;
@@ -17,6 +18,11 @@ namespace SkibidiRunner.Managers
         public override void Initialize()
         {
             _scoreMultiplier = gameMapSetup.GameMapSetup.ScoreMultiplier;
+            if (DateTime.UtcNow < LocalYandexData.Instance.EndTime50Adv)
+            {
+                _scoreMultiplier += _scoreMultiplier * 0.5f;
+            }
+            _score = LocalYandexData.Instance.BonusScore;
             StopAllCoroutines();
             StartCoroutine(ScoreMeter());
         }

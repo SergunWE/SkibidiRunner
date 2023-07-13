@@ -9,5 +9,6 @@ namespace YandexSDK.Scripts
         public float SoundVolume;
         public int ScoreRecord;
         public int SelectedMusic;
+        public int BonusScore;
     }
 }

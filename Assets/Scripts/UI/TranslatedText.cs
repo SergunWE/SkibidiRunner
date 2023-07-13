@@ -11,19 +11,27 @@ namespace SkibidiRunner.UI
         [SerializeField] private string enText;
         [SerializeField] private string trText;
 
+        public TMP_Text Text { get; private set; }
+        
         private void Awake()
+        {
+            Text = GetComponent<TMP_Text>();
+            SetText();
+        }
+
+        public void SetText()
         {
             switch (YandexGamesManager.GetLanguage())
             {
                 case Language.Russian:
-                    GetComponent<TMP_Text>().text = ruText;
+                    Text.text = ruText;
                     break;
                 case Language.Turkey:
-                    GetComponent<TMP_Text>().text = trText;
+                    Text.text = trText;
                     break;
                 case Language.English:
                 default:
-                    GetComponent<TMP_Text>().text =enText;
+                    Text.text =enText;
                     break;
             }
         }

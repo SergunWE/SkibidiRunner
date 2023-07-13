@@ -101,14 +101,48 @@ mergeInto(LibraryManager.library, {
   },
 
   getLang: function () {
-      var lang = ysdk.environment.i18n.lang;
-      var bufferSize = lengthBytesUTF8(lang) + 1;
-      var buffer = _malloc(bufferSize);
-      stringToUTF8(lang, buffer, bufferSize);
-      return buffer;
+    var lang = ysdk.environment.i18n.lang;
+    var bufferSize = lengthBytesUTF8(lang) + 1;
+    var buffer = _malloc(bufferSize);
+    stringToUTF8(lang, buffer, bufferSize);
+    return buffer;
   },
 
   helloString: function (str) {
     window.alert(UTF8ToString(str));
+  },
+
+  showSplashPageAdv: function () {
+    ysdk.adv.showFullscreenAdv({
+      callbacks: {
+        onClose: function (wasShown) {
+          // some action after close
+        },
+        onError: function (error) {
+          // some action on error
+        },
+      },
+    });
+  },
+
+  showRewardedAdv: function () {
+    ysdk.adv.showRewardedVideo({
+      callbacks: {
+        onOpen: () => {
+          console.log("Video ad open.");
+        },
+        onRewarded: () => {
+          console.log("Rewarded!");
+          return 1;
+        },
+        onClose: () => {
+          console.log("Video ad closed.");
+        },
+        onError: (e) => {
+          console.log("Error while open video ad:", e);
+          return 0;
+        },
+      },
+    });
   },
 });

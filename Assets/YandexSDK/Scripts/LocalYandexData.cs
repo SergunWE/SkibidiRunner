@@ -1,10 +1,26 @@
-﻿namespace YandexSDK.Scripts
+﻿using System;
+
+namespace YandexSDK.Scripts
 {
     public class LocalYandexData : ICloudData
     {
         private static LocalYandexData _instance;
 
         public static LocalYandexData Instance => _instance ??= new LocalYandexData();
+        
+        public DateTime EndTimeSplashAdv { get; set; }
+        public DateTime EndTime10Adv { get; set; }
+        public DateTime EndTime50Adv { get; set; }
+
+        public int BonusScore
+        {
+            get => _playerData.BonusScore;
+            set
+            {
+                _playerData.BonusScore = value;
+                SaveData();
+            }
+        }
 
         public float MusicVolume
         {

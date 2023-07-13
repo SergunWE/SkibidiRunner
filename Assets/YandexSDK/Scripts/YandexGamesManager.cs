@@ -34,6 +34,12 @@ namespace YandexSDK.Scripts
         
         [DllImport("__Internal")]
         private static extern void helloString(string str);
+        
+        [DllImport("__Internal")]
+        private static extern void showSplashPageAdv();
+        
+        [DllImport("__Internal")]
+        private static extern int showRewardedAdv();
 
         /// <summary>
         /// User name on the Yandex Games platform
@@ -96,7 +102,7 @@ namespace YandexSDK.Scripts
             }
             catch(Exception e)
             {
-                helloString("SavePlayerData " + e);
+                Debug.Log(e);
             }
         }
 
@@ -109,7 +115,7 @@ namespace YandexSDK.Scripts
             }
             catch (Exception e)
             {
-                helloString("LoadPlayerData " + e);
+                Debug.Log(e);
                 return null;
             }
             
@@ -144,6 +150,30 @@ namespace YandexSDK.Scripts
                 return Language.English;
             }
             
+        }
+
+        public static void ShowSplashAdv()
+        {
+            try
+            {
+                showSplashPageAdv();
+            }
+            catch
+            {
+                // ignored
+            }
+        }
+        
+        public static bool ShowRewardedAdv()
+        {
+            try
+            {
+                return showRewardedAdv() == 1;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }
