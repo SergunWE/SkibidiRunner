@@ -34,10 +34,14 @@ namespace SkibidiRunner.Player
         private int _slidingAnimationId;
         private int _jumpAnimationId;
         private int _deathAnimationId;
+        private int _idleAnimationId;
 
         private readonly Collider[] _hitColliders = new Collider[5];
         private Vector3 _originalControllerCenter;
+        private Vector3 _slideControllerCenter;
         private float _originalControllerHeight;
+        private float _slideControllerHeight;
+        private Coroutine _slideCoroutine;
 
         public void Awake()
         {
@@ -46,11 +50,15 @@ namespace SkibidiRunner.Player
             _slidingAnimationId = Animator.StringToHash("RunningSlide");
             _jumpAnimationId = Animator.StringToHash("Jump");
             _deathAnimationId = Animator.StringToHash("FallingBackDeath");
+            _idleAnimationId = Animator.StringToHash("StandardRun");
             _turnAction = _playerInput.actions["Turn"];
             _jumpAction = _playerInput.actions["Jump"];
             _slideAction = _playerInput.actions["Slide"];
             _originalControllerCenter = _controller.center;
             _originalControllerHeight = _controller.height;
+            _slideControllerCenter =
+                _originalControllerCenter + Vector3.down * (_originalControllerHeight * 0.5f * 0.5f);
+            _slideControllerHeight = _originalControllerHeight / 2;
         }
 
         private void Start()
@@ -115,19 +123,26 @@ namespace SkibidiRunner.Player
         public void PlayerSlide()
         {
             if (_sliding) return;
-            StartCoroutine(Slide());
+            if (_slideCoroutine != null)
+            {
+                StopCoroutine(_slideCoroutine);
+            }
+            animator.StopPlayback();
+            _slideCoroutine = StartCoroutine(Slide());
             SlidingEvent?.Invoke();
         }
-        
+
         public void PlayerJump()
         {
-            if (!IsGrounded() && (!_sliding || !IsGrounded(1f))) return;
+            if (!IsGrounded()) return;
+            _controller.center = _originalControllerCenter;
+            _controller.height = _originalControllerHeight;
             _playerVelocity.y = 0;
             _playerVelocity.y += Mathf.Sqrt(jumpHeight * _gravity * -3f);
             animator.Play(_jumpAnimationId);
             JumpEvent?.Invoke();
         }
-        
+
         private void PlayerTurn(InputAction.CallbackContext context)
         {
             PlayerTurn(context.ReadValue<float>());
@@ -145,20 +160,14 @@ namespace SkibidiRunner.Player
 
         private IEnumerator Slide()
         {
-            _sliding = true;
+            //_sliding = true;
+            _controller.height = _slideControllerHeight;
+            _controller.center = _slideControllerCenter;
             _playerVelocity.y -= Mathf.Sqrt(jumpHeight * _gravity * -3f);
-            // Shrink the collider
-            Vector3 originalControllerCenter = _controller.center;
-            Vector3 newControllerCenter = originalControllerCenter;
-            _controller.height /= 2;
-            newControllerCenter.y -= _controller.height / 2;
-            _controller.center = newControllerCenter;
-            // PLay the sliding animation
-            animator.Play(_slidingAnimationId);
+            animator.Play(_slidingAnimationId, -1, 0);
             yield return new WaitForSeconds(0.7f);
-            // Set the character controller collider back to normal after sliding.
-            _controller.height *= 2;
-            _controller.center = originalControllerCenter;
+            _controller.center = _originalControllerCenter;
+            _controller.height = _originalControllerHeight;
             _sliding = false;
         }
 
@@ -187,20 +196,10 @@ namespace SkibidiRunner.Player
             return null;
         }
 
-        private bool IsGrounded(float length = .4f)
+        private bool IsGrounded(float length = .6f)
         {
-            var transform1 = transform;
-            var raycastOriginFirst = transform1.position;
-            raycastOriginFirst.y -= _controller.height / 2f;
-            raycastOriginFirst.y += .1f;
-
-            var raycastOriginSecond = raycastOriginFirst;
-            var forward = transform1.forward;
-            raycastOriginFirst -= forward * .2f;
-            raycastOriginSecond += forward * .2f;
-
-            return Physics.Raycast(raycastOriginFirst, Vector3.down, out var hit, length, groundLayer) ||
-                   Physics.Raycast(raycastOriginSecond, Vector3.down, out var hit2, length, groundLayer);
+            var raycastPosition = transform.position + _slideControllerCenter;
+            return Physics.Raycast(raycastPosition, Vector3.down, out var hit, length, groundLayer);
         }
 
         private void OnControllerColliderHit(ControllerColliderHit hit)

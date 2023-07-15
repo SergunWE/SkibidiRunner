@@ -6,6 +6,7 @@ public class SwipeDetection : MonoBehaviour
 {
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private float swipeResistance = 100;
+    [SerializeField] private float swipeMulti = 5;
 
     public event Action<Vector2> SwipePerformed;
 
@@ -29,12 +30,12 @@ public class SwipeDetection : MonoBehaviour
 
         if (Mathf.Abs(delta.x) > swipeResistance)
         {
-            direction.x = Mathf.Clamp(delta.x, -1, 1);
+            direction.x = Mathf.Clamp(delta.x * swipeMulti, -1, 1);
         }
 
         if (Mathf.Abs(delta.y) > swipeResistance)
         {
-            direction.y = Mathf.Clamp(delta.y, -1, 1);
+            direction.y = Mathf.Clamp(delta.y* swipeMulti, -1, 1);
         }
 
         if (direction != Vector2.zero & SwipePerformed != null)
