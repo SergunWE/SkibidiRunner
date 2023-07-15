@@ -486,7 +486,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: fb46b84f6dc67fd408c4d4fc1760e6a0,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fb46b84f6dc67fd408c4d4fc1760e6a0,
         type: 3}
@@ -780,7 +780,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 51f8844649f43ff44a7141959ba130ea,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 51f8844649f43ff44a7141959ba130ea,
         type: 3}
@@ -907,6 +907,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delaySeconds: 120
+  advStarted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2058916117}
+        m_TargetAssemblyTypeName: SkibidiRunner.Managers.PauseManager, Assembly-CSharp
+        m_MethodName: PauseGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  advEnded:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2058916117}
+        m_TargetAssemblyTypeName: SkibidiRunner.Managers.PauseManager, Assembly-CSharp
+        m_MethodName: ResumeGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &586794902
 GameObject:
   m_ObjectHideFlags: 0
@@ -1161,6 +1191,7 @@ GameObject:
   m_Component:
   - component: {fileID: 627542681}
   - component: {fileID: 627542680}
+  - component: {fileID: 627542682}
   m_Layer: 0
   m_Name: Bootstrap
   m_TagString: Untagged
@@ -1196,8 +1227,21 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &627542682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 627542679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a901f0232c2f466bbe53212e0f2fd2e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fps: -1
 --- !u!1 &628099834
 GameObject:
   m_ObjectHideFlags: 0
@@ -1339,7 +1383,7 @@ PrefabInstance:
     - target: {fileID: 7493069068393652597, guid: d1bc38dd49605864690bd11be3a4da2a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 7493069068393652597, guid: d1bc38dd49605864690bd11be3a4da2a,
         type: 3}
@@ -1670,7 +1714,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &896006375
 PrefabInstance:
@@ -1683,7 +1727,7 @@ PrefabInstance:
     - target: {fileID: 5475724674181686055, guid: 50a7756a8e2f0f14787d70ef66f51488,
         type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5475724674181686055, guid: 50a7756a8e2f0f14787d70ef66f51488,
         type: 3}
@@ -2604,7 +2648,7 @@ PrefabInstance:
     - target: {fileID: 5475724674181686055, guid: 50a7756a8e2f0f14787d70ef66f51488,
         type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 5475724674181686055, guid: 50a7756a8e2f0f14787d70ef66f51488,
         type: 3}
@@ -2883,7 +2927,7 @@ PrefabInstance:
     - target: {fileID: 4932783208359550338, guid: 6a3c86731e266f74facc5cd237862a44,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4932783208359550338, guid: 6a3c86731e266f74facc5cd237862a44,
         type: 3}
@@ -3300,7 +3344,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1354931803
 GameObject:
@@ -3954,7 +3998,7 @@ PrefabInstance:
     - target: {fileID: 5475724674181686055, guid: 50a7756a8e2f0f14787d70ef66f51488,
         type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5475724674181686055, guid: 50a7756a8e2f0f14787d70ef66f51488,
         type: 3}
@@ -4042,6 +4086,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delaySeconds: 300
+  advStarted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2058916117}
+        m_TargetAssemblyTypeName: SkibidiRunner.Managers.PauseManager, Assembly-CSharp
+        m_MethodName: PauseGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  advEnded:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2058916117}
+        m_TargetAssemblyTypeName: SkibidiRunner.Managers.PauseManager, Assembly-CSharp
+        m_MethodName: ResumeGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1601355035
 GameObject:
   m_ObjectHideFlags: 0
@@ -5236,6 +5310,50 @@ MonoBehaviour:
   - {fileID: 370665577}
   - {fileID: 1521536582}
   - {fileID: 1724812768}
+--- !u!1 &2058916116
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2058916118}
+  - component: {fileID: 2058916117}
+  m_Layer: 0
+  m_Name: PauseManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2058916117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2058916116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d640f22dfb3543d3bde184c2188cc32c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &2058916118
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2058916116}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2060885291
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5252,7 +5370,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 279fdc5bd9fe46e46a29c42b648a684f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 279fdc5bd9fe46e46a29c42b648a684f,
         type: 3}
@@ -5762,7 +5880,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: e449b0b9b6c98144d8b807e3e0fde028,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e449b0b9b6c98144d8b807e3e0fde028,
         type: 3}

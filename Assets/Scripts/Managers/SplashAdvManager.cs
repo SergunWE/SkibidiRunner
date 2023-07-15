@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Events;
 using YandexSDK.Scripts;
 
 namespace SkibidiRunner.Managers
@@ -8,6 +9,9 @@ namespace SkibidiRunner.Managers
     {
         [SerializeField] private int delaySeconds;
         [SerializeField] private bool showStartup;
+
+        [SerializeField] private UnityEvent advStarted;
+        [SerializeField] private UnityEvent advEnded;
         
         public override void Initialize()
         {
@@ -20,8 +24,17 @@ namespace SkibidiRunner.Managers
         public void ShowAdv()
         {
             if (DateTime.UtcNow < LocalYandexData.Instance.EndTimeSplashAdv) return;
-            YandexGamesManager.ShowSplashAdv();
-            LocalYandexData.Instance.EndTimeSplashAdv = DateTime.UtcNow + TimeSpan.FromSeconds(delaySeconds);
+            advStarted?.Invoke();
+            YandexGamesManager.ShowSplashAdv(gameObject.name, nameof(OnAdvShowed));
+        }
+
+        public void OnAdvShowed(int result)
+        {
+            if (result == 1)
+            {
+                LocalYandexData.Instance.EndTimeSplashAdv = DateTime.UtcNow + TimeSpan.FromSeconds(delaySeconds);
+            }
+            advEnded?.Invoke();
         }
     }
 }

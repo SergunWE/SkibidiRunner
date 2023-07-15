@@ -1,6 +1,7 @@
 ﻿using System;
 using SkibidiRunner.UI;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace SkibidiRunner.Managers
@@ -9,6 +10,9 @@ namespace SkibidiRunner.Managers
     public class AdvButton : MonoBehaviour
     {
         [SerializeField] protected int delaySeconds;
+        
+        [SerializeField] protected UnityEvent advStarted;
+        [SerializeField] protected UnityEvent advEnded;
         
         private Button _button;
         private TranslatedText _translatedText;
@@ -19,7 +23,7 @@ namespace SkibidiRunner.Managers
             _translatedText = GetComponentInChildren<TranslatedText>();
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (AdsAvailable())
             {

@@ -36,10 +36,10 @@ namespace YandexSDK.Scripts
         private static extern void helloString(string str);
         
         [DllImport("__Internal")]
-        private static extern void showSplashPageAdv();
+        private static extern void showSplashPageAdv(string objectName, string methodName);
         
         [DllImport("__Internal")]
-        private static extern int showRewardedAdv();
+        private static extern void showRewardedAdv(string objectName, string methodName);
 
         /// <summary>
         /// User name on the Yandex Games platform
@@ -152,11 +152,11 @@ namespace YandexSDK.Scripts
             
         }
 
-        public static void ShowSplashAdv()
+        public static void ShowSplashAdv(string objectName, string methodName)
         {
             try
             {
-                showSplashPageAdv();
+                showSplashPageAdv(objectName, methodName);
             }
             catch
             {
@@ -164,15 +164,15 @@ namespace YandexSDK.Scripts
             }
         }
         
-        public static bool ShowRewardedAdv()
+        public static void ShowRewardedAdv(string objectName, string methodName)
         {
             try
             {
-                return showRewardedAdv() == 1;
+                showRewardedAdv(objectName, methodName);
             }
             catch (Exception)
             {
-                return false;
+                // ignored
             }
         }
     }

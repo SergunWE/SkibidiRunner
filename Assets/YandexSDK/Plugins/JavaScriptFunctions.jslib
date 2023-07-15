@@ -112,20 +112,20 @@ mergeInto(LibraryManager.library, {
     window.alert(UTF8ToString(str));
   },
 
-  showSplashPageAdv: function () {
+  showSplashPageAdv: function (objectName, methodName) {
     ysdk.adv.showFullscreenAdv({
       callbacks: {
         onClose: function (wasShown) {
-          // some action after close
+          myGameInstance.SendMessage(objectName, methodName, 1);
         },
         onError: function (error) {
-          // some action on error
+          myGameInstance.SendMessage(objectName, methodName, 0);
         },
       },
     });
   },
 
-  showRewardedAdv: function () {
+  showRewardedAdv: function (objectName, methodName) {
     ysdk.adv.showRewardedVideo({
       callbacks: {
         onOpen: () => {
@@ -133,14 +133,14 @@ mergeInto(LibraryManager.library, {
         },
         onRewarded: () => {
           console.log("Rewarded!");
-          return 1;
+          myGameInstance.SendMessage(objectName, methodName, 1);
         },
         onClose: () => {
           console.log("Video ad closed.");
         },
         onError: (e) => {
           console.log("Error while open video ad:", e);
-          return 0;
+          myGameInstance.SendMessage(objectName, methodName, 0);
         },
       },
     });
