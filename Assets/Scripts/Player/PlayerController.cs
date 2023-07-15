@@ -99,10 +99,8 @@ namespace SkibidiRunner.Player
             _controller.enabled = true;
         }
 
-        private void PlayerTurn(InputAction.CallbackContext context)
+        public void PlayerTurn(float contextValue)
         {
-            float contextValue = context.ReadValue<float>();
-
             var turnPosition = CheckTurn(contextValue);
             if (turnPosition.HasValue)
             {
@@ -114,20 +112,35 @@ namespace SkibidiRunner.Player
             }
         }
 
-        private void PlayerSlide(InputAction.CallbackContext context)
+        public void PlayerSlide()
         {
             if (_sliding) return;
             StartCoroutine(Slide());
             SlidingEvent?.Invoke();
         }
-
-        private void PlayerJump(InputAction.CallbackContext context)
+        
+        public void PlayerJump()
         {
             if (!IsGrounded() && (!_sliding || !IsGrounded(1f))) return;
             _playerVelocity.y = 0;
             _playerVelocity.y += Mathf.Sqrt(jumpHeight * _gravity * -3f);
             animator.Play(_jumpAnimationId);
             JumpEvent?.Invoke();
+        }
+        
+        private void PlayerTurn(InputAction.CallbackContext context)
+        {
+            PlayerTurn(context.ReadValue<float>());
+        }
+
+        private void PlayerSlide(InputAction.CallbackContext context)
+        {
+            PlayerSlide();
+        }
+
+        private void PlayerJump(InputAction.CallbackContext context)
+        {
+            PlayerJump();
         }
 
         private IEnumerator Slide()
@@ -142,7 +155,7 @@ namespace SkibidiRunner.Player
             _controller.center = newControllerCenter;
             // PLay the sliding animation
             animator.Play(_slidingAnimationId);
-            yield return new WaitForSeconds(0.8f);
+            yield return new WaitForSeconds(0.7f);
             // Set the character controller collider back to normal after sliding.
             _controller.height *= 2;
             _controller.center = originalControllerCenter;
@@ -151,6 +164,7 @@ namespace SkibidiRunner.Player
 
         private void GameOver()
         {
+            _playerInput.actions.Disable();
             _controller.height = _originalControllerHeight;
             _controller.center = _originalControllerCenter;
             animator.Play(_deathAnimationId);
