@@ -1,11 +1,17 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace SkibidiRunner.Managers
 {
     public class PauseManager : MonoBehaviour
     {
         private float _timeScale;
-        
+
+        private void Awake()
+        {
+            _timeScale = Time.timeScale;
+        }
+
         public void PauseGame()
         {
             _timeScale = Time.timeScale;

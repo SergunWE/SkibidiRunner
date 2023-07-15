@@ -107,6 +107,15 @@ namespace SkibidiRunner.Player
             _controller.enabled = true;
         }
 
+        public void OnLifeGained()
+        {
+            enabled = true;
+            _playerInput.actions.Enable();
+            _controller.height = _originalControllerHeight;
+            _controller.center = _originalControllerCenter;
+            animator.Play(_idleAnimationId);
+        }
+
         public void PlayerTurn(float contextValue)
         {
             var turnPosition = CheckTurn(contextValue);

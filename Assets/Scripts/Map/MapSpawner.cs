@@ -131,6 +131,11 @@ namespace SkibidiRunner.Map
             SpawnTiles(Random.Range(_minimumTiles, _maximumTiles), true);
         }
 
+        public void OnLifeGained()
+        {
+            SpawnTiles(gameMapSetup.GameMapSetup.InitialTile);
+        }
+
         public void IncreaseFrequencyObstacles()
         {
             _obstacleFrequency += _increasedFrequencyObstacles;

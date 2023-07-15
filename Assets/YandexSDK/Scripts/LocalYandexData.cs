@@ -10,7 +10,8 @@ namespace YandexSDK.Scripts
         
         public DateTime EndTimeSplashAdv { get; set; }
         public DateTime EndTime10Adv { get; set; }
-        public DateTime EndTime50Adv { get; set; }
+        public DateTime EndTime30Adv { get; set; }
+        public DateTime EndTimeLiveAdv { get; set; }
 
         public int BonusScore
         {

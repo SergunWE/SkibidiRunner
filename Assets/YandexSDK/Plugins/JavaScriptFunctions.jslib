@@ -113,19 +113,27 @@ mergeInto(LibraryManager.library, {
   },
 
   showSplashPageAdv: function (objectName, methodName) {
+    var obj = UTF8ToString(objectName);
+    var method = UTF8ToString(methodName);
+    console.log(obj);
+    console.log(method);
     ysdk.adv.showFullscreenAdv({
       callbacks: {
         onClose: function (wasShown) {
-          myGameInstance.SendMessage(objectName, methodName, 1);
+          myGameInstance.SendMessage(obj, method, 1);
         },
         onError: function (error) {
-          myGameInstance.SendMessage(objectName, methodName, 0);
+          myGameInstance.SendMessage(obj, method, 0);
         },
       },
     });
   },
 
   showRewardedAdv: function (objectName, methodName) {
+    var obj = UTF8ToString(objectName);
+    var method = UTF8ToString(methodName);
+    console.log(obj);
+    console.log(method);
     ysdk.adv.showRewardedVideo({
       callbacks: {
         onOpen: () => {
@@ -133,14 +141,14 @@ mergeInto(LibraryManager.library, {
         },
         onRewarded: () => {
           console.log("Rewarded!");
-          myGameInstance.SendMessage(objectName, methodName, 1);
+          myGameInstance.SendMessage(obj, method, 1);
         },
         onClose: () => {
           console.log("Video ad closed.");
         },
         onError: (e) => {
           console.log("Error while open video ad:", e);
-          myGameInstance.SendMessage(objectName, methodName, 0);
+          myGameInstance.SendMessage(obj, method, 0);
         },
       },
     });

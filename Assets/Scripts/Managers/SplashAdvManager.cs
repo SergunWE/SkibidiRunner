@@ -10,9 +10,9 @@ namespace SkibidiRunner.Managers
         [SerializeField] private int delaySeconds;
         [SerializeField] private bool showStartup;
 
-        [SerializeField] private UnityEvent advStarted;
-        [SerializeField] private UnityEvent advEnded;
-        
+        [SerializeField] public UnityEvent advStarted;
+        [SerializeField] public UnityEvent advEnded;
+
         public override void Initialize()
         {
             if (showStartup)
@@ -21,20 +21,25 @@ namespace SkibidiRunner.Managers
             }
         }
 
-        public void ShowAdv()
+        public bool ShowAdv()
         {
-            if (DateTime.UtcNow < LocalYandexData.Instance.EndTimeSplashAdv) return;
-            advStarted?.Invoke();
-            YandexGamesManager.ShowSplashAdv(gameObject.name, nameof(OnAdvShowed));
+            if (DateTime.UtcNow < LocalYandexData.Instance.EndTimeSplashAdv) return false;
+            YandexGamesManager.ShowSplashAdv(gameObject.name, nameof(AdvCallback));
+            return true;
         }
 
-        public void OnAdvShowed(int result)
+        public void AdvCallback(int result)
         {
-            if (result == 1)
+            switch (result)
             {
-                LocalYandexData.Instance.EndTimeSplashAdv = DateTime.UtcNow + TimeSpan.FromSeconds(delaySeconds);
+                case 0:
+                    advStarted?.Invoke();
+                    break;
+                case 1:
+                    LocalYandexData.Instance.EndTimeSplashAdv = DateTime.UtcNow + TimeSpan.FromSeconds(delaySeconds);
+                    advEnded?.Invoke();
+                    break;
             }
-            advEnded?.Invoke();
         }
     }
 }

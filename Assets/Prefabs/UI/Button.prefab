@@ -152,6 +152,7 @@ MonoBehaviour:
   ruText: 
   enText: 
   trText: 
+  text: {fileID: 755192093600605070}
 --- !u!1 &6561810466325457524
 GameObject:
   m_ObjectHideFlags: 0

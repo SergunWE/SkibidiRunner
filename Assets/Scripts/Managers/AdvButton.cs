@@ -1,40 +1,37 @@
-﻿using System;
-using SkibidiRunner.UI;
+﻿using SkibidiRunner.UI;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace SkibidiRunner.Managers
 {
-    [RequireComponent(typeof(Button))]
     public class AdvButton : MonoBehaviour
     {
+        [SerializeField] private Button button;
         [SerializeField] protected int delaySeconds;
-        
         [SerializeField] protected UnityEvent advStarted;
         [SerializeField] protected UnityEvent advEnded;
         
-        private Button _button;
         private TranslatedText _translatedText;
 
         private void Awake()
         {
-            _button = GetComponent<Button>();
-            _translatedText = GetComponentInChildren<TranslatedText>();
+            _translatedText = button.GetComponentInChildren<TranslatedText>();
+            button.onClick.AddListener(ShowAdv);
         }
 
         private void FixedUpdate()
         {
             if (AdsAvailable())
             {
-                if(_button.interactable) return;
-                _button.interactable = true;
+                if(button.interactable) return;
+                button.interactable = true;
                 _translatedText.SetText();
             }
             else
             {
-                _button.interactable = false;
-                _translatedText.Text.text = TimeBeforeAccess().ToString(@"mm\:ss");
+                button.interactable = false;
+                _translatedText.SetText(TextBeforeAccess());
             }
         }
 
@@ -43,9 +40,13 @@ namespace SkibidiRunner.Managers
             return true;
         }
 
-        protected virtual TimeSpan TimeBeforeAccess()
+        protected virtual string TextBeforeAccess()
         {
-            return TimeSpan.Zero;
+            return "";
+        }
+
+        public virtual void ShowAdv()
+        {
         }
     }
 }

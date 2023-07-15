@@ -1,27 +1,27 @@
 ﻿using System;
+using UnityEngine;
 using YandexSDK.Scripts;
 
 namespace SkibidiRunner.Managers
 {
-    public class Rewarded10AdvButton : AdvButton
+    public class Rewarded30AdvButton : AdvButton
     {
         protected override bool AdsAvailable()
         {
-            return DateTime.UtcNow - LocalYandexData.Instance.EndTime10Adv > TimeSpan.FromSeconds(delaySeconds);
+            return DateTime.UtcNow - LocalYandexData.Instance.EndTime30Adv > TimeSpan.FromSeconds(delaySeconds);
         }
 
         protected override string TextBeforeAccess()
         {
-            return (TimeSpan.FromSeconds(delaySeconds) - (DateTime.UtcNow - LocalYandexData.Instance.EndTime10Adv))
+            return (TimeSpan.FromSeconds(delaySeconds) - (DateTime.UtcNow - LocalYandexData.Instance.EndTime30Adv))
                 .ToString(@"mm\:ss");
         }
 
         public override void ShowAdv()
         {
-            if (DateTime.UtcNow < LocalYandexData.Instance.EndTime10Adv) return;
+            if (DateTime.UtcNow < LocalYandexData.Instance.EndTime30Adv) return;
 #if UNITY_EDITOR
-            LocalYandexData.Instance.EndTime10Adv = DateTime.UtcNow + TimeSpan.FromSeconds(delaySeconds);
-            LocalYandexData.Instance.BonusScore += 10;
+            LocalYandexData.Instance.EndTime30Adv = DateTime.UtcNow + TimeSpan.FromSeconds(delaySeconds);
 #else
             YandexGamesManager.ShowRewardedAdv(gameObject.name, nameof(OnAdvShowed));
 #endif
@@ -35,8 +35,7 @@ namespace SkibidiRunner.Managers
                     advStarted?.Invoke();
                     break;
                 case 1:
-                    LocalYandexData.Instance.EndTime10Adv = DateTime.UtcNow + TimeSpan.FromSeconds(delaySeconds);
-                    LocalYandexData.Instance.BonusScore += 10;
+                    LocalYandexData.Instance.EndTime30Adv = DateTime.UtcNow + TimeSpan.FromSeconds(delaySeconds);
                     break;
                 case 2:
                     advEnded?.Invoke();

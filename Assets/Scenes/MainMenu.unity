@@ -27,7 +27,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 2039a0ad0a9d05549928b70362f54902, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -195,7 +195,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100892335}
-  m_LocalRotation: {x: 0.13200106, y: -0.23735328, z: 0.03257317, w: 0.96186185}
+  m_LocalRotation: {x: 0.13200106, y: -0.23735328, z: 0.032573167, w: 0.9618618}
   m_LocalPosition: {x: 1.059, y: 3.05, z: -9.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -204,6 +204,82 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 13.756, y: -35.76, z: 0}
+--- !u!1 &165774140
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 165774142}
+  - component: {fileID: 165774141}
+  m_Layer: 0
+  m_Name: 10AdvManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &165774141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165774140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bc11c26b1ac4024825ae8a576fba7b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 1630753042}
+  delaySeconds: 120
+  advStarted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2058916117}
+        m_TargetAssemblyTypeName: SkibidiRunner.Managers.PauseManager, Assembly-CSharp
+        m_MethodName: PauseGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  advEnded:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2058916117}
+        m_TargetAssemblyTypeName: SkibidiRunner.Managers.PauseManager, Assembly-CSharp
+        m_MethodName: ResumeGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!4 &165774142
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165774140}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &203844586
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,6 +551,7 @@ MonoBehaviour:
   ruText: "\u0417\u0432\u0443\u043A\u0438"
   enText: Sound
   trText: Sesler
+  text: {fileID: 225272261}
 --- !u!1001 &301671216
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -882,61 +959,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51f8844649f43ff44a7141959ba130ea, type: 3}
---- !u!1 &466758260 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6561810466325457524, guid: c68098f323da1764b9ad10e6db991cbf,
-    type: 3}
-  m_PrefabInstance: {fileID: 1630753041}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &466758261 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4418884472256942581, guid: c68098f323da1764b9ad10e6db991cbf,
     type: 3}
   m_PrefabInstance: {fileID: 1630753041}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &466758265
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 466758260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bc11c26b1ac4024825ae8a576fba7b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  delaySeconds: 120
-  advStarted:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2058916117}
-        m_TargetAssemblyTypeName: SkibidiRunner.Managers.PauseManager, Assembly-CSharp
-        m_MethodName: PauseGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  advEnded:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2058916117}
-        m_TargetAssemblyTypeName: SkibidiRunner.Managers.PauseManager, Assembly-CSharp
-        m_MethodName: ResumeGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &586794902
 GameObject:
   m_ObjectHideFlags: 0
@@ -2026,6 +2054,82 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   splashStep: 2
   splashSize: 1.05
+--- !u!1 &993912121
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 993912123}
+  - component: {fileID: 993912122}
+  m_Layer: 0
+  m_Name: 50AdvManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &993912122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993912121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0684c81f8c934d5cbccf63fbb9d3a652, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 1793770425}
+  delaySeconds: 300
+  advStarted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2058916117}
+        m_TargetAssemblyTypeName: SkibidiRunner.Managers.PauseManager, Assembly-CSharp
+        m_MethodName: PauseGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  advEnded:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2058916117}
+        m_TargetAssemblyTypeName: SkibidiRunner.Managers.PauseManager, Assembly-CSharp
+        m_MethodName: ResumeGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!4 &993912123
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993912121}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1008853242
 GameObject:
   m_ObjectHideFlags: 0
@@ -2375,6 +2479,7 @@ MonoBehaviour:
   ruText: "\u041C\u0443\u0437\u044B\u043A\u0430"
   enText: Music
   trText: "M\xFCzik"
+  text: {fileID: 1044553367}
 --- !u!1001 &1091250634
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3280,57 +3385,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameMusic: {fileID: 1098360257}
   musicSource: {fileID: 1257183036}
-  beat:
+  beatEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1601355038}
-        m_TargetAssemblyTypeName: SkibidiRunner.UI.BeatSplashes, Assembly-CSharp
-        m_MethodName: OnBeat
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1151770766}
-        m_TargetAssemblyTypeName: SkibidiRunner.UI.BeatSplashes, Assembly-CSharp
-        m_MethodName: OnBeat
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 907690504}
-        m_TargetAssemblyTypeName: SkibidiRunner.UI.BeatSplashes, Assembly-CSharp
-        m_MethodName: OnBeat
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1368708714}
-        m_TargetAssemblyTypeName: SkibidiRunner.UI.BeatSplashes, Assembly-CSharp
-        m_MethodName: OnBeat
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+  beatSplashesList:
+  - {fileID: 1601355038}
+  - {fileID: 1151770766}
+  - {fileID: 907690504}
+  - {fileID: 1368708714}
 --- !u!4 &1257183038
 Transform:
   m_ObjectHideFlags: 0
@@ -3995,6 +4057,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4452666311913636650, guid: 50a7756a8e2f0f14787d70ef66f51488,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.2
+      objectReference: {fileID: 0}
     - target: {fileID: 5475724674181686055, guid: 50a7756a8e2f0f14787d70ef66f51488,
         type: 3}
       propertyPath: m_RootOrder
@@ -4061,61 +4128,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50a7756a8e2f0f14787d70ef66f51488, type: 3}
---- !u!1 &1587576131 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6561810466325457524, guid: c68098f323da1764b9ad10e6db991cbf,
-    type: 3}
-  m_PrefabInstance: {fileID: 1793770424}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1587576132 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4418884472256942581, guid: c68098f323da1764b9ad10e6db991cbf,
     type: 3}
   m_PrefabInstance: {fileID: 1793770424}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1587576136
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1587576131}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0684c81f8c934d5cbccf63fbb9d3a652, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  delaySeconds: 300
-  advStarted:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2058916117}
-        m_TargetAssemblyTypeName: SkibidiRunner.Managers.PauseManager, Assembly-CSharp
-        m_MethodName: PauseGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  advEnded:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2058916117}
-        m_TargetAssemblyTypeName: SkibidiRunner.Managers.PauseManager, Assembly-CSharp
-        m_MethodName: ResumeGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &1601355035
 GameObject:
   m_ObjectHideFlags: 0
@@ -4283,6 +4301,7 @@ MonoBehaviour:
   ruText: "\u0421\u043A\u0438\u0431\u0438\u0434\u0438 \u0440\u0430\u043D\u043D\u0435\u0440"
   enText: Skibidi Runner
   trText: "Skibidi Ko\u015Fucusu"
+  text: {fileID: 1601355037}
 --- !u!1001 &1630753041
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4424,7 +4443,7 @@ PrefabInstance:
     - target: {fileID: 7471561075573521859, guid: c68098f323da1764b9ad10e6db991cbf,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7471561075573521859, guid: c68098f323da1764b9ad10e6db991cbf,
         type: 3}
@@ -4435,12 +4454,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 466758265}
+      objectReference: {fileID: 0}
     - target: {fileID: 7471561075573521859, guid: c68098f323da1764b9ad10e6db991cbf,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 466758265}
+      objectReference: {fileID: 0}
     - target: {fileID: 7471561075573521859, guid: c68098f323da1764b9ad10e6db991cbf,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
@@ -4474,12 +4493,20 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6561810466325457524, guid: c68098f323da1764b9ad10e6db991cbf,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 466758265}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c68098f323da1764b9ad10e6db991cbf, type: 3}
+--- !u!114 &1630753042 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7471561075573521859, guid: c68098f323da1764b9ad10e6db991cbf,
+    type: 3}
+  m_PrefabInstance: {fileID: 1630753041}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1635658956
 GameObject:
   m_ObjectHideFlags: 0
@@ -5076,9 +5103,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7471561075573521859, guid: c68098f323da1764b9ad10e6db991cbf,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7471561075573521859, guid: c68098f323da1764b9ad10e6db991cbf,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1587576136}
+      objectReference: {fileID: 0}
     - target: {fileID: 7471561075573521859, guid: c68098f323da1764b9ad10e6db991cbf,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -5092,12 +5124,20 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6561810466325457524, guid: c68098f323da1764b9ad10e6db991cbf,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1587576136}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c68098f323da1764b9ad10e6db991cbf, type: 3}
+--- !u!114 &1793770425 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7471561075573521859, guid: c68098f323da1764b9ad10e6db991cbf,
+    type: 3}
+  m_PrefabInstance: {fileID: 1793770424}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1879771083
 GameObject:
   m_ObjectHideFlags: 0
@@ -5827,7 +5867,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2071771104}
-  m_LocalRotation: {x: 0.13200106, y: -0.23735328, z: 0.03257317, w: 0.96186185}
+  m_LocalRotation: {x: 0.13200106, y: -0.23735328, z: 0.032573167, w: 0.9618618}
   m_LocalPosition: {x: 1.059, y: 3.05, z: -9.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

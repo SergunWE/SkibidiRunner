@@ -1,5 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using YandexSDK.Scripts;
 
 namespace SkibidiRunner.UI
@@ -10,29 +11,29 @@ namespace SkibidiRunner.UI
         [SerializeField] private string ruText;
         [SerializeField] private string enText;
         [SerializeField] private string trText;
-
-        public TMP_Text Text { get; private set; }
+        [SerializeField] private TMP_Text text;
         
         private void Awake()
         {
-            Text = GetComponent<TMP_Text>();
             SetText();
         }
 
-        public void SetText()
+        public void SetText(string newText = null)
+        {
+            text.text = string.IsNullOrEmpty(newText) ? CurrentText() : newText;
+        }
+
+        private string CurrentText()
         {
             switch (YandexGamesManager.GetLanguage())
             {
                 case Language.Russian:
-                    Text.text = ruText;
-                    break;
+                    return ruText;
                 case Language.Turkey:
-                    Text.text = trText;
-                    break;
+                    return trText;
                 case Language.English:
                 default:
-                    Text.text =enText;
-                    break;
+                    return enText;
             }
         }
     }

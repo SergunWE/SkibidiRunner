@@ -22,6 +22,7 @@ namespace SkibidiRunner.UI
 
         public void OnBeat()
         {
+            if(!gameObject.activeInHierarchy) return;
             if (_beatNumber == splashStep)
             {
                 _transform.localScale = Vector3.one * splashSize;

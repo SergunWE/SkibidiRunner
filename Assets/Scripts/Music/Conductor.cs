@@ -1,6 +1,8 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using SkibidiRunner.Managers;
 using SkibidiRunner.Map;
+using SkibidiRunner.UI;
 using UnityEngine;
 using UnityEngine.Events;
 using YandexSDK.Scripts;
@@ -15,7 +17,8 @@ namespace SkibidiRunner.Music
 
         private float _songPositionInBeats;
 
-        [SerializeField] private UnityEvent beat;
+        [SerializeField] private UnityEvent beatEvent;
+        [SerializeField] private List<BeatSplashes> beatSplashesList;
         
         private float _songBpm;
         private float _secPerBeat = float.MaxValue;
@@ -35,14 +38,12 @@ namespace SkibidiRunner.Music
             _secPerBeat = 60f / _songBpm;
             musicSource.clip = music.Song;
             musicSource.volume = LocalYandexData.Instance.MusicVolume;
-            _initDsp = (float) AudioSettings.dspTime;
             musicSource.Play();
             Debug.Log($"{nameof(Conductor)} init {stopwatch.ElapsedMilliseconds}ms");
         }
         
         private void Update()
         {
-            if(_initDsp >= (float) AudioSettings.dspTime) return;
             if (!_init)
             {
                 _dspSongTime = (float)AudioSettings.dspTime - gameMusic.CurrentMusic.FirstBeatOffset;
@@ -54,7 +55,11 @@ namespace SkibidiRunner.Music
                 _songPositionInBeats = _songPosition / _secPerBeat;
                 if (_lastBeat >= (int) _songPositionInBeats) return;
                 _lastBeat = (int) _songPositionInBeats;
-                beat?.Invoke();
+                beatEvent?.Invoke();
+                foreach (var beat in beatSplashesList)
+                {
+                    beat.OnBeat();
+                }
             }
         }
     }

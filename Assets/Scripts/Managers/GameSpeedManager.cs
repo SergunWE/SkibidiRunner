@@ -7,6 +7,7 @@ namespace SkibidiRunner.Managers
     {
         [SerializeField] private CurrentSetup gameMapSetup;
         private float _speedChangeRate;
+        private float _currentSpeed;
         
         public override void Initialize()
         {
@@ -22,7 +23,14 @@ namespace SkibidiRunner.Managers
 
         public void GameOver()
         {
+            _currentSpeed = Time.timeScale;
             Time.timeScale = gameMapSetup.GameMapSetup.InitialSpeedTime;
+        }
+
+        public void OnLifeGained()
+        {
+            _currentSpeed /= 2;
+            Time.timeScale = _currentSpeed;
         }
     }
 }

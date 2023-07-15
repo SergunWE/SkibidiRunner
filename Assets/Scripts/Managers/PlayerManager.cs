@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Cinemachine;
 using SkibidiRunner.Player;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
 using Debug = UnityEngine.Debug;
@@ -20,6 +21,9 @@ namespace SkibidiRunner.Managers
 
         private PlayerController _currentPlayerController;
 
+        private readonly Vector3 _offset = new(0, 4, -4);
+        private Quaternion _rotation;
+
         public override void Initialize()
         {
             var stopwatch = Stopwatch.StartNew();
@@ -32,6 +36,7 @@ namespace SkibidiRunner.Managers
             _currentPlayerController.JumpEvent = jumpEvent;
             _currentPlayerController.SlidingEvent = slidingEvent;
             _currentPlayerController.Awake();
+            _rotation = Quaternion.Euler(-180, 0, 0);
             Debug.Log($"{nameof(PlayerManager)} init {stopwatch.ElapsedMilliseconds}ms");
         }
 
