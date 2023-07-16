@@ -1936,7 +1936,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInput: {fileID: 8881699830959170338}
   swipeResistance: 50
-  swipeMulti: 5
 --- !u!1 &107969707
 GameObject:
   m_ObjectHideFlags: 0
@@ -3846,7 +3845,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe5058c0db72405881e26591329550a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delaySeconds: 100
+  delaySeconds: 120
   showStartup: 0
   advStarted:
     m_PersistentCalls:
@@ -7039,7 +7038,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.22975291, y: -0.000000016746096, z: 0.0000000039532173, w: 0.973249}
+  m_LocalRotation: {x: 0.22975291, y: 0.000000016746089, z: -0.0000000039532155, w: 0.973249}
   m_LocalPosition: {x: 0, y: 5.1, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -17623,7 +17622,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 866119329}
-  m_LocalRotation: {x: 0.22975291, y: -0.000000016746096, z: 0.0000000039532173, w: 0.973249}
+  m_LocalRotation: {x: 0.22975291, y: 0.000000016746089, z: -0.0000000039532155, w: 0.973249}
   m_LocalPosition: {x: 0, y: 5.1, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

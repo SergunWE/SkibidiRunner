@@ -8,12 +8,12 @@ namespace SkibidiRunner.Managers
     {
         protected override bool AdsAvailable()
         {
-            return DateTime.UtcNow - LocalYandexData.Instance.EndTime30Adv > TimeSpan.FromSeconds(delaySeconds);
+            return DateTime.UtcNow - LocalYandexData.Instance.EndTime30Adv > TimeSpan.Zero;
         }
 
         protected override string TextBeforeAccess()
         {
-            return (TimeSpan.FromSeconds(delaySeconds) + (DateTime.UtcNow - LocalYandexData.Instance.EndTime30Adv))
+            return (LocalYandexData.Instance.EndTime30Adv - DateTime.UtcNow)
                 .ToString(@"mm\:ss");
         }
 
