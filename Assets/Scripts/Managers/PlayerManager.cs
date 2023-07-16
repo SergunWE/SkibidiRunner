@@ -44,5 +44,11 @@ namespace SkibidiRunner.Managers
         {
             _currentPlayerController.ChangePosition(playerPosition + Vector3.up * playerSpawnPosition.position.y);
         }
+
+        public void OnLifeGained()
+        {
+            cinemachineVirtualCamera.Follow = currentPlayerGameObject.transform;
+            cinemachineVirtualCamera.LookAt = currentPlayerGameObject.transform;
+        }
     }
 }

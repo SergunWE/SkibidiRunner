@@ -119,11 +119,14 @@ mergeInto(LibraryManager.library, {
     console.log(method);
     ysdk.adv.showFullscreenAdv({
       callbacks: {
+        onOpen: function() {
+          myGameInstance.SendMessage(obj, method, 0);
+        },
         onClose: function (wasShown) {
           myGameInstance.SendMessage(obj, method, 1);
         },
         onError: function (error) {
-          myGameInstance.SendMessage(obj, method, 0);
+          myGameInstance.SendMessage(obj, method, -1);
         },
       },
     });
@@ -138,17 +141,19 @@ mergeInto(LibraryManager.library, {
       callbacks: {
         onOpen: () => {
           console.log("Video ad open.");
+          myGameInstance.SendMessage(obj, method, 0);
         },
         onRewarded: () => {
           console.log("Rewarded!");
           myGameInstance.SendMessage(obj, method, 1);
         },
         onClose: () => {
-          console.log("Video ad closed.");
+          console.log("Video ad close.");
+          myGameInstance.SendMessage(obj, method, 2);
         },
         onError: (e) => {
           console.log("Error while open video ad:", e);
-          myGameInstance.SendMessage(obj, method, 0);
+          myGameInstance.SendMessage(obj, method, -1);
         },
       },
     });
