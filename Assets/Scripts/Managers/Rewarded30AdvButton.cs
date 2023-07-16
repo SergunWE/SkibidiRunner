@@ -13,7 +13,7 @@ namespace SkibidiRunner.Managers
 
         protected override string TextBeforeAccess()
         {
-            return (TimeSpan.FromSeconds(delaySeconds) - (DateTime.UtcNow - LocalYandexData.Instance.EndTime30Adv))
+            return (TimeSpan.FromSeconds(delaySeconds) + (DateTime.UtcNow - LocalYandexData.Instance.EndTime30Adv))
                 .ToString(@"mm\:ss");
         }
 

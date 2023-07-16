@@ -17,7 +17,7 @@ namespace SkibidiRunner.Managers
 
         protected override bool AdsAvailable()
         {
-            return DateTime.UtcNow - LocalYandexData.Instance.EndTimeLiveAdv > TimeSpan.FromSeconds(delaySeconds) &&
+            return DateTime.UtcNow - LocalYandexData.Instance.EndTimeLiveAdv > TimeSpan.Zero &&
                    _currentLifeNumber < maximumNumberLives;
         }
 
