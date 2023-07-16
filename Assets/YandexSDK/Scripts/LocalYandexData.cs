@@ -18,6 +18,7 @@ namespace YandexSDK.Scripts
             get => _playerData.BonusScore;
             set
             {
+                if(value == _playerData.BonusScore) return;
                 _playerData.BonusScore = value;
                 SaveData();
             }
@@ -28,6 +29,7 @@ namespace YandexSDK.Scripts
             get => _playerData.MusicVolume;
             set
             {
+                if(value.Equals(_playerData.MusicVolume)) return;
                 _playerData.MusicVolume = value;
                 SaveData();
             }
@@ -38,6 +40,7 @@ namespace YandexSDK.Scripts
             get => _playerData.SoundVolume;
             set
             {
+                if(value.Equals(_playerData.SoundVolume)) return;
                 _playerData.SoundVolume = value;
                 SaveData();
             }
@@ -59,6 +62,7 @@ namespace YandexSDK.Scripts
             get => _playerData.SelectedMusic;
             set
             {
+                if(value == _playerData.SelectedMusic) return;
                 _playerData.SelectedMusic = value;
                 SaveData();
             }
