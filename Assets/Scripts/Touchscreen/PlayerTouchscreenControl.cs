@@ -6,6 +6,7 @@ namespace SkibidiRunner.Touchscreen
     public class PlayerTouchscreenControl : MonoBehaviour
     {
         [SerializeField] private SwipeDetection swipeDetection;
+        [SerializeField, Range(0,1)] private float accuracy;
         
         [SerializeField] private UnityEvent onSwipeUp;
         [SerializeField] private UnityEvent onSwipeDown;
@@ -19,19 +20,19 @@ namespace SkibidiRunner.Touchscreen
 
         private void OnSwipe(Vector2 direction)
         {
-            if (direction == Vector2.up)
+            if (Vector2.Dot(direction, Vector2.up) >= accuracy)
             {
                 onSwipeUp?.Invoke(); 
             }
-            else if(direction == Vector2.down)
+            else if(Vector2.Dot(direction, Vector2.down) >= accuracy)
             {
                 onSwipeDown?.Invoke(); 
             }
-            else if(direction == Vector2.left)
+            else if(Vector2.Dot(direction, Vector2.left) >= accuracy)
             {
                 onSwipeLeft?.Invoke(); 
             }
-            else if(direction == Vector2.right)
+            else if(Vector2.Dot(direction, Vector2.right) >= accuracy)
             {
                 onSwipeRight?.Invoke(); 
             }

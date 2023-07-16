@@ -26,17 +26,7 @@ public class SwipeDetection : MonoBehaviour
     private void DetectSwipe()
     {
         var delta = CurrentPos - _initialPos;
-        var direction = Vector2.zero;
-
-        if (Mathf.Abs(delta.x) > swipeResistance)
-        {
-            direction.x = Mathf.Clamp(delta.x * swipeMulti, -1, 1);
-        }
-
-        if (Mathf.Abs(delta.y) > swipeResistance)
-        {
-            direction.y = Mathf.Clamp(delta.y* swipeMulti, -1, 1);
-        }
+        var direction = delta.normalized;
 
         if (direction != Vector2.zero & SwipePerformed != null)
             SwipePerformed(direction);

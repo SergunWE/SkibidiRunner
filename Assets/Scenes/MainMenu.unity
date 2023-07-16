@@ -27,7 +27,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 2039a0ad0a9d05549928b70362f54902, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: d4454f71d85928744be7771e2143dab7, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,8 +38,8 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_Sun: {fileID: 203844588}
+  m_IndirectSpecularColor: {r: 0.09070957, g: 0.10655342, b: 0.13141696, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -195,7 +195,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100892335}
-  m_LocalRotation: {x: 0.13200106, y: -0.23735328, z: 0.032573167, w: 0.9618618}
+  m_LocalRotation: {x: 0.13200106, y: -0.23735328, z: 0.03257317, w: 0.96186185}
   m_LocalPosition: {x: 1.059, y: 3.05, z: -9.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -332,8 +332,8 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1.2
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 2.2
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -342,7 +342,7 @@ Light:
     m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 0.9
+    m_Strength: 1
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2
@@ -376,8 +376,8 @@ Light:
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
+  m_ColorTemperature: 5000
+  m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
@@ -1471,6 +1471,7 @@ PrefabInstance:
     - {fileID: 4364118376359252771, guid: d1bc38dd49605864690bd11be3a4da2a, type: 3}
     - {fileID: 1546994012129224542, guid: d1bc38dd49605864690bd11be3a4da2a, type: 3}
     - {fileID: 4221348789105773586, guid: d1bc38dd49605864690bd11be3a4da2a, type: 3}
+    - {fileID: 4160149493324209018, guid: d1bc38dd49605864690bd11be3a4da2a, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1bc38dd49605864690bd11be3a4da2a, type: 3}
@@ -4196,9 +4197,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u0421\u043A\u0438\u0431\u0438\u0434\u0438 \u0440\u0430\u043D\u043D\u0435\u0440"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 55a32b7d9943d6046b371094200f0a51, type: 2}
-  m_sharedMaterial: {fileID: -7133819170152210383, guid: 55a32b7d9943d6046b371094200f0a51,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5818,7 +5818,7 @@ Camera:
   m_GameObject: {fileID: 2071771104}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 4
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -5867,7 +5867,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2071771104}
-  m_LocalRotation: {x: 0.13200106, y: -0.23735328, z: 0.032573167, w: 0.9618618}
+  m_LocalRotation: {x: 0.13200106, y: -0.23735328, z: 0.03257317, w: 0.96186185}
   m_LocalPosition: {x: 1.059, y: 3.05, z: -9.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
