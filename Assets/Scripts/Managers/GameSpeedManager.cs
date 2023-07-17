@@ -6,9 +6,10 @@ namespace SkibidiRunner.Managers
     public class GameSpeedManager : MonoBehaviourInitializable
     {
         [SerializeField] private CurrentSetup gameMapSetup;
+        [SerializeField] private PauseManager pauseManager;
         private float _speedChangeRate;
         private float _currentSpeed;
-        
+
         public override void Initialize()
         {
             var setup = gameMapSetup.GameMapSetup;
@@ -30,7 +31,7 @@ namespace SkibidiRunner.Managers
         public void OnLifeGained()
         {
             _currentSpeed /= 2;
-            Time.timeScale = _currentSpeed;
+            pauseManager.SetNewTimeScale(_currentSpeed);
         }
     }
 }

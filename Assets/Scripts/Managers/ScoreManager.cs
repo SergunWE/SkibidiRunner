@@ -36,7 +36,6 @@ namespace SkibidiRunner.Managers
             int score = (int) _score;
             gameOverText.text = score.ToString();
             LocalYandexData.Instance.ScoreRecord = score;
-            YandexGamesManager.SetToLeaderboard(score);
         }
 
         public void OnLifeGained()

@@ -15,4 +15,4 @@ MonoBehaviour:
   <Song>k__BackingField: {fileID: 8300000, guid: 786676fd262771d4e8075ee5693e72a3,
     type: 3}
   <SongBpm>k__BackingField: 133
-  <FirstBeatOffset>k__BackingField: 0.2
+  <FirstBeatOffset>k__BackingField: 0.1

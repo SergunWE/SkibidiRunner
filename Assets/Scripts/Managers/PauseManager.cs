@@ -12,6 +12,11 @@ namespace SkibidiRunner.Managers
             _timeScale = Time.timeScale;
         }
 
+        public void SetNewTimeScale(float value)
+        {
+            _timeScale = value;
+        }
+
         public void PauseGame()
         {
             _timeScale = Time.timeScale;
