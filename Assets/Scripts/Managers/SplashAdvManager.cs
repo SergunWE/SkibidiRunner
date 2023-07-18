@@ -5,7 +5,7 @@ using YandexSDK.Scripts;
 
 namespace SkibidiRunner.Managers
 {
-    public class SplashAdvManager : MonoBehaviourInitializable
+    public class SplashAdvManager : MonoBehaviour
     {
         [SerializeField] private int delaySeconds;
         [SerializeField] private bool showStartup;
@@ -13,7 +13,7 @@ namespace SkibidiRunner.Managers
         [SerializeField] public UnityEvent advStarted;
         [SerializeField] public UnityEvent advEnded;
 
-        public override void Initialize()
+        private void Start()
         {
             if (showStartup)
             {

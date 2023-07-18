@@ -68,25 +68,28 @@ mergeInto(LibraryManager.library, {
   savePlayerData: function (data) {
     try {
       var dateString = UTF8ToString(data);
-      console.log(dateString);
+      //console.log(dateString);
       var myobj = JSON.parse(dateString);
-      player.setData(myobj);
+      player.setData(myobj).then(() => {
+        console.log("data is set");
+      });
     } catch (err) {
       console.error(err);
     }
   },
 
-  loadPlayerData: function () {
+  loadPlayerData: function (objectName, methodName) {
+    var obj = UTF8ToString(objectName);
+    var method = UTF8ToString(methodName);
     try {
       player.getData().then((_date) => {
-        var myJSON = JSON.stringify(_date);
-        var bufferSize = lengthBytesUTF8(myJSON) + 1;
-        var buffer = _malloc(bufferSize);
-        stringToUTF8(myJSON, buffer, bufferSize);
-        return buffer;
+        const myJSON = JSON.stringify(_date);
+        console.log(myJSON);
+        myGameInstance.SendMessage(obj, method, myJSON);
       });
     } catch (err) {
       console.error(err);
+      myGameInstance.SendMessage(obj, method, null);
     }
   },
 
@@ -119,7 +122,7 @@ mergeInto(LibraryManager.library, {
     console.log(method);
     ysdk.adv.showFullscreenAdv({
       callbacks: {
-        onOpen: function() {
+        onOpen: function () {
           myGameInstance.SendMessage(obj, method, 0);
         },
         onClose: function (wasShown) {

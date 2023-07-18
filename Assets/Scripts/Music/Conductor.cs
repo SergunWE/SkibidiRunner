@@ -30,6 +30,16 @@ namespace SkibidiRunner.Music
         private bool _init;
         private float _initDsp;
 
+        private void OnEnable()
+        {
+            LocalYandexData.Instance.OnYandexDataLoaded += OnYandexDataLoaded;
+        }
+        
+        private void OnDisable()
+        {
+            LocalYandexData.Instance.OnYandexDataLoaded -= OnYandexDataLoaded;
+        }
+
         public override void Initialize()
         {
             var stopwatch = Stopwatch.StartNew();
@@ -61,6 +71,11 @@ namespace SkibidiRunner.Music
                     beat.OnBeat();
                 }
             }
+        }
+
+        private void OnYandexDataLoaded()
+        {
+            musicSource.volume = LocalYandexData.Instance.MusicVolume;
         }
     }
 }

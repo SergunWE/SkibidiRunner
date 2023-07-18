@@ -11,14 +11,21 @@ namespace SkibidiRunner.Managers
 
         private void OnEnable()
         {
-            musicSlider.value = LocalYandexData.Instance.MusicVolume;
-            soundSlider.value = LocalYandexData.Instance.SoundVolume;
+            SetSliders();
+            LocalYandexData.Instance.OnYandexDataLoaded += SetSliders;
         }
 
         private void OnDisable()
         {
-             LocalYandexData.Instance.MusicVolume = musicSlider.value;
-             LocalYandexData.Instance.SoundVolume = soundSlider.value;
+            LocalYandexData.Instance.OnYandexDataLoaded -= SetSliders;
+            LocalYandexData.Instance.MusicVolume = musicSlider.value;
+            LocalYandexData.Instance.SoundVolume = soundSlider.value;
+        }
+
+        private void SetSliders()
+        {
+            musicSlider.value = LocalYandexData.Instance.MusicVolume;
+            soundSlider.value = LocalYandexData.Instance.SoundVolume;
         }
     }
 }

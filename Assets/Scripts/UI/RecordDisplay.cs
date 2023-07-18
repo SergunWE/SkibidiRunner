@@ -1,6 +1,5 @@
-﻿using TMPro;
+﻿using SkibidiRunner.Managers;
 using UnityEngine;
-using UnityEngine.Serialization;
 using YandexSDK.Scripts;
 
 namespace SkibidiRunner.UI
@@ -8,6 +7,16 @@ namespace SkibidiRunner.UI
     public class RecordDisplay : MonoBehaviour
     {
         [SerializeField] private TranslatedText translatedText;
+
+        private void OnEnable()
+        {
+            LocalYandexData.Instance.OnYandexDataLoaded += Start;
+        }
+
+        private void OnDisable()
+        {
+            LocalYandexData.Instance.OnYandexDataLoaded -= Start;
+        }
 
         private void Start()
         {

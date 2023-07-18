@@ -24,7 +24,7 @@ namespace YandexSDK.Scripts
         private static extern void savePlayerData(string data);
         
         [DllImport("__Internal")]
-        private static extern string loadPlayerData();
+        private static extern void loadPlayerData(string objectName, string methodName);
         
         [DllImport("__Internal")]
         private static extern void setToLeaderboard(int value);
@@ -106,17 +106,15 @@ namespace YandexSDK.Scripts
             }
         }
 
-        public static PlayerData LoadPlayerData()
+        public static void LoadPlayerData(string objectName, string methodName)
         {
             try
             {
-                string json = loadPlayerData();
-                return JsonUtility.FromJson<PlayerData>(json);
+                loadPlayerData(objectName, methodName);
             }
             catch (Exception e)
             {
                 Debug.Log(e);
-                return null;
             }
             
         }

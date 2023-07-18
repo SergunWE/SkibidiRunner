@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Threading.Tasks;
+using UnityEngine;
 
 namespace YandexSDK.Scripts
 {
     public class LocalYandexData : ICloudData
     {
         private static LocalYandexData _instance;
-
         public static LocalYandexData Instance => _instance ??= new LocalYandexData();
         
         public DateTime EndTimeSplashAdv { get; set; }
@@ -18,7 +19,7 @@ namespace YandexSDK.Scripts
             get => _playerData.BonusScore;
             set
             {
-                if(value == _playerData.BonusScore) return;
+                if(value <= _playerData.BonusScore) return;
                 _playerData.BonusScore = value;
                 SaveData();
             }
@@ -51,7 +52,7 @@ namespace YandexSDK.Scripts
             get => _playerData.ScoreRecord;
             set
             {
-                if(value <=  _playerData.ScoreRecord) return;
+                if(value <= _playerData.ScoreRecord) return;
                 _playerData.ScoreRecord = value;
                 YandexGamesManager.SetToLeaderboard(value);
                 SaveData();
@@ -68,16 +69,32 @@ namespace YandexSDK.Scripts
                 SaveData();
             }
         }
+        
+        public bool YandexDataLoaded { get; private set; }
+        
+        public event Action OnYandexDataLoaded;
 
         private readonly PlayerData _playerData;
 
         private LocalYandexData()
         {
-            _playerData = YandexGamesManager.LoadPlayerData() ?? new PlayerData
+            _playerData = new PlayerData
             {
-                MusicVolume = 0.5f,
-                SoundVolume = 0.5f
+                SoundVolume = 0.5f,
+                MusicVolume = 0.5f
             };
+        }
+        
+        public void SetPlayerData(PlayerData playerData)
+        {
+            YandexDataLoaded = true;
+            BonusScore = playerData.BonusScore;
+            MusicVolume = playerData.MusicVolume;
+            SoundVolume = playerData.SoundVolume;
+            ScoreRecord = playerData.ScoreRecord;
+            SelectedMusic = playerData.SelectedMusic;
+            OnYandexDataLoaded?.Invoke();
+            SaveData();
         }
 
         private void SaveData()

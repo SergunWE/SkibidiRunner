@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using TempleRun;
 using UnityEngine;
 using UnityEngine.Events;

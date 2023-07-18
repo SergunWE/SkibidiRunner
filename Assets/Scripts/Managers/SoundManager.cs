@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using YandexSDK.Scripts;
 
 namespace SkibidiRunner.Managers
@@ -8,7 +9,17 @@ namespace SkibidiRunner.Managers
         [SerializeField] private AudioSource audioSource;
 
         private float _volume;
+
+        private void OnEnable()
+        {
+            LocalYandexData.Instance.OnYandexDataLoaded += Initialize;
+        }
         
+        private void OnDisable()
+        {
+            LocalYandexData.Instance.OnYandexDataLoaded -= Initialize;
+        }
+
         public override void Initialize()
         {
             _volume = LocalYandexData.Instance.SoundVolume;

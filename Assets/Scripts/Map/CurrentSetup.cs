@@ -16,9 +16,7 @@ namespace SkibidiRunner.Map
         
         public override void Initialize()
         {
-            //todo get in YandexSDK
             _currentMusicIndex = LocalYandexData.Instance.SelectedMusic;
-            
             CurrentMusic = gameMusics[_currentMusicIndex];
         }
     }
