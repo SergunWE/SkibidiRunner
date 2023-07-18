@@ -94,7 +94,6 @@ namespace YandexSDK.Scripts
             ScoreRecord = playerData.ScoreRecord;
             SelectedMusic = playerData.SelectedMusic;
             OnYandexDataLoaded?.Invoke();
-            SaveData();
         }
 
         private void SaveData()
