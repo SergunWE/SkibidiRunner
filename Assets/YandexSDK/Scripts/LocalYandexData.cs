@@ -54,7 +54,6 @@ namespace YandexSDK.Scripts
             {
                 if(value <= _playerData.ScoreRecord) return;
                 _playerData.ScoreRecord = value;
-                YandexGamesManager.SetToLeaderboard(value);
                 SaveData();
             }
         }
