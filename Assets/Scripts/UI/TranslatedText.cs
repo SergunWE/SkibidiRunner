@@ -13,7 +13,7 @@ namespace SkibidiRunner.UI
         [SerializeField] private string trText;
         [SerializeField] private TMP_Text text;
         
-        private void Awake()
+        private void Start()
         {
             SetText();
         }
