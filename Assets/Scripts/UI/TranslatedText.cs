@@ -23,7 +23,7 @@ namespace SkibidiRunner.UI
             text.text = string.IsNullOrEmpty(newText) ? CurrentText() : newText;
         }
 
-        public string CurrentText()
+        private string CurrentText()
         {
             switch (YandexGamesManager.GetLanguage())
             {
