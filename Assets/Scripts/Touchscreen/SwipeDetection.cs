@@ -11,20 +11,33 @@ public class SwipeDetection : MonoBehaviour
 
     private InputAction _positionAction, _pressAction;
     private Vector2 _initialPos;
-    private Vector2 CurrentPos => _positionAction.ReadValue<Vector2>();
 
     private void Awake()
     {
         _pressAction = playerInput.actions["PrimaryContact"];
         _positionAction = playerInput.actions["PrimaryPosition"];
-
-        _pressAction.performed += _ => { _initialPos = CurrentPos; };
-        _pressAction.canceled += _ => DetectSwipe();
     }
 
-    private void DetectSwipe()
+    private void OnEnable()
     {
-        var delta = CurrentPos - _initialPos;
+        _pressAction.started += OnStarted;
+        _pressAction.canceled += DetectSwipe;
+    }
+
+    private void OnDisable()
+    {
+        _pressAction.started -= OnStarted;
+        _pressAction.canceled -= DetectSwipe;
+    }
+
+    private void OnStarted(InputAction.CallbackContext context)
+    {
+        _initialPos = _positionAction.ReadValue<Vector2>();
+    }
+
+    private void DetectSwipe(InputAction.CallbackContext context)
+    {
+        var delta = _positionAction.ReadValue<Vector2>() - _initialPos;
         if (delta.magnitude < swipeResistance) return;
         var direction = delta.normalized;
         if (direction != Vector2.zero & SwipePerformed != null)

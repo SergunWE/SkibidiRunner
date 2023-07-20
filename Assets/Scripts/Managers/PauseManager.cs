@@ -19,6 +19,7 @@ namespace SkibidiRunner.Managers
 
         public void PauseGame()
         {
+            if(!enabled) return;
             _timeScale = Time.timeScale;
             Time.timeScale = 0;
             AudioListener.pause = true;
@@ -26,6 +27,7 @@ namespace SkibidiRunner.Managers
 
         public void ResumeGame()
         {
+            if(!enabled) return;
             Time.timeScale = _timeScale;
             AudioListener.pause = false;
         }

@@ -112,6 +112,7 @@ namespace SkibidiRunner.Player
         {
             enabled = true;
             _playerInput.actions.Enable();
+            _playerInput.ActivateInput();
             _controller.height = _originalControllerHeight;
             _controller.center = _originalControllerCenter;
             animator.Play(_idleAnimationId);
