@@ -10,5 +10,6 @@ namespace YandexSDK.Scripts
         public int ScoreRecord;
         public int SelectedMusic;
         public int BonusScore;
+        public long LastSaveTimeTicks;
     }
 }

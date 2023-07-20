@@ -15,8 +15,8 @@ namespace SkibidiRunner.Music
         private static readonly Dictionary<Language, string[]> Texts = new()
         {
             {Language.Russian, new[] {"Выбрать", "Набери", "Выбрано"}},
-            {Language.English, new[] {"Select", "Dial it up", "Selected"}},
-            {Language.Turkey, new[] {"Seçiniz", "Çevirin", "Seçilmiş"}}
+            {Language.English, new[] {"Select", "Score", "Selected"}},
+            {Language.Turkey, new[] {"Seçiniz", "Puan", "Seçilmiş"}}
         };
         
         private readonly Language _language = YandexGamesManager.GetLanguage();

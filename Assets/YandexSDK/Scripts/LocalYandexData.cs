@@ -87,16 +87,20 @@ namespace YandexSDK.Scripts
         public void SetPlayerData(PlayerData playerData)
         {
             YandexDataLoaded = true;
-            BonusScore = playerData.BonusScore;
-            MusicVolume = playerData.MusicVolume;
-            SoundVolume = playerData.SoundVolume;
-            ScoreRecord = playerData.ScoreRecord;
-            SelectedMusic = playerData.SelectedMusic;
+            if (playerData.LastSaveTimeTicks != 0)
+            {
+                BonusScore = playerData.BonusScore;
+                MusicVolume = playerData.MusicVolume;
+                SoundVolume = playerData.SoundVolume;
+                ScoreRecord = playerData.ScoreRecord;
+                SelectedMusic = playerData.SelectedMusic;
+            }
             OnYandexDataLoaded?.Invoke();
         }
 
         private void SaveData()
         {
+            _playerData.LastSaveTimeTicks = DateTime.UtcNow.Ticks;
             YandexGamesManager.SavePlayerData(_playerData);
         }
     }
