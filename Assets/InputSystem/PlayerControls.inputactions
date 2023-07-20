@@ -54,17 +54,6 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "016aa6c6-8539-4c14-be96-a9e369935ba5",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "a30e93b1-e869-4de8-a7e6-d314a0d91aa1",
                     "path": "<Keyboard>/w",
                     "interactions": "",
@@ -100,17 +89,6 @@
                     "name": "",
                     "id": "b9e9a6c7-12d2-4150-b390-da992d153b30",
                     "path": "<Keyboard>/downArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Slide",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "03f0fae3-05be-4bfa-af85-a3d16dac65c7",
-                    "path": "<Keyboard>/leftCtrl",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

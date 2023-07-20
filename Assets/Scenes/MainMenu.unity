@@ -2365,7 +2365,7 @@ PrefabInstance:
     - target: {fileID: 2657580569401782921, guid: a00a9321df069684c9664458dfae6848,
         type: 3}
       propertyPath: <RequiredNumberPoints>k__BackingField
-      value: 200
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 4086154427893121532, guid: a00a9321df069684c9664458dfae6848,
         type: 3}
@@ -5200,7 +5200,7 @@ PrefabInstance:
     - target: {fileID: 2657580569401782921, guid: a00a9321df069684c9664458dfae6848,
         type: 3}
       propertyPath: <RequiredNumberPoints>k__BackingField
-      value: 350
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 4086154427893121532, guid: a00a9321df069684c9664458dfae6848,
         type: 3}
