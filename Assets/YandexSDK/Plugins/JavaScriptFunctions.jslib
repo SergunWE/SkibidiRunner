@@ -70,7 +70,7 @@ mergeInto(LibraryManager.library, {
       var dateString = UTF8ToString(data);
       //console.log(dateString);
       var myobj = JSON.parse(dateString);
-      player.setData(myobj).then(() => {
+      player.setData(myobj, true).then(() => {
         console.log("data is set");
       });
     } catch (err) {
