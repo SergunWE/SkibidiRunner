@@ -1,6 +1,7 @@
 ﻿using SkibidiRunner.Managers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using YandexSDK.Scripts;
 
 namespace SkibidiRunner.MenuManagers
 {
@@ -13,6 +14,7 @@ namespace SkibidiRunner.MenuManagers
 
         public void ExitGame()
         {
+            YandexGamesManager.RequestReviewGame();
             SceneManager.LoadSceneAsync(0);
         }
     }

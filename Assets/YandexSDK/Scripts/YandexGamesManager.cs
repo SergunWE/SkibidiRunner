@@ -16,30 +16,33 @@ namespace YandexSDK.Scripts
 
         [DllImport("__Internal")]
         private static extern void requestReviewGame();
-        
+
         [DllImport("__Internal")]
         private static extern int getReviewStatus();
-        
+
         [DllImport("__Internal")]
         private static extern void savePlayerData(string data);
-        
+
         [DllImport("__Internal")]
         private static extern void loadPlayerData(string objectName, string methodName);
-        
+
         [DllImport("__Internal")]
         private static extern void setToLeaderboard(int value);
-        
+
         [DllImport("__Internal")]
         private static extern string getLang();
-        
+
         [DllImport("__Internal")]
         private static extern void helloString(string str);
-        
+
         [DllImport("__Internal")]
         private static extern void showSplashPageAdv(string objectName, string methodName);
-        
+
         [DllImport("__Internal")]
         private static extern void showRewardedAdv(string objectName, string methodName);
+
+        [DllImport("__Internal")]
+        private static extern void apiReady();
 
         /// <summary>
         /// User name on the Yandex Games platform
@@ -74,7 +77,14 @@ namespace YandexSDK.Scripts
         /// </summary>
         public static void RequestReviewGame()
         {
-            requestReviewGame();
+            try
+            {
+                requestReviewGame();
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
         }
 
         /// <summary>
@@ -100,7 +110,7 @@ namespace YandexSDK.Scripts
                 string json = JsonUtility.ToJson(playerData);
                 savePlayerData(json);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Debug.Log(e);
             }
@@ -116,7 +126,6 @@ namespace YandexSDK.Scripts
             {
                 Debug.Log(e);
             }
-            
         }
 
         public static void SetToLeaderboard(int value)
@@ -147,7 +156,6 @@ namespace YandexSDK.Scripts
             {
                 return Language.English;
             }
-            
         }
 
         public static void ShowSplashAdv(string objectName, string methodName)
@@ -161,12 +169,24 @@ namespace YandexSDK.Scripts
                 // ignored
             }
         }
-        
+
         public static void ShowRewardedAdv(string objectName, string methodName)
         {
             try
             {
                 showRewardedAdv(objectName, methodName);
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
+        }
+
+        public static void ApiReady()
+        {
+            try
+            {
+                apiReady();
             }
             catch (Exception)
             {

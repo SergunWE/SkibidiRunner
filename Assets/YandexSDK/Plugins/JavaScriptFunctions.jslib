@@ -32,7 +32,7 @@ mergeInto(LibraryManager.library, {
           console.log(feedbackSent);
         });
       } else {
-        console.error(reason);
+        console.log(reason);
       }
     });
   },
@@ -165,5 +165,13 @@ mergeInto(LibraryManager.library, {
         },
       },
     });
+  },
+
+  apiReady: function () {
+    try {
+      ysdk.features.LoadingAPI.ready();
+    } catch (err) {
+      console.error(err);
+    }
   },
 });
